@@ -1,7 +1,8 @@
 const { app, BrowserWindow } = require('electron');
+const path = require('path');
 
-function createWindow() {
-    const mainWindow = new BrowserWindow({
+function crearVentana() {
+    const ventana = new BrowserWindow({
         width: 1200,
         height: 800,
         webPreferences: {
@@ -10,15 +11,15 @@ function createWindow() {
         }
     });
 
-    mainWindow.loadFile('pp2.html');
+    ventana.loadFile(path.join(__dirname, 'views', 'login.html'));
 }
 
 app.whenReady().then(() => {
-    createWindow();
+    crearVentana();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
+            crearVentana();
         }
     });
 });
