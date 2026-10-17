@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de clientes | Costumas</title>
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="gestionclientes.css">
+</head>
+<body>
+
+    <aside class="Lateral">
+        <img src="LogoBlancoCostuBorgoñaMas.png"
+             alt="Logo Costumas"
+             class="LogoMenu">
+
+        <button onclick="location.href='pp2.html'">
+            <i class="bi bi-house"></i>
+            Panel principal
+        </button>
+
+        <button class="Activo">
+            <i class="bi bi-people"></i>
+            Gestión de clientes
+        </button>
+
+        <button>
+            <i class="bi bi-pencil-square"></i>
+            Gestión de medidas
+        </button>
+
+        <button>
+            <i class="bi bi-clipboard2-plus"></i>
+            Encargos
+        </button>
+
+        <button>
+            <i class="bi bi-clipboard2-check"></i>
+            Entregas
+        </button>
+
+        <button>
+            <i class="bi bi-cash-coin"></i>
+            Pagos
+        </button>
+
+        <button>
+            <i class="bi bi-graph-up-arrow"></i>
+            Reportes
+        </button>
+    </aside>
+
+    <main class="ContenidoClientes">
+
+        <nav class="BarraSuperior">
+            <div>
+                <h2>Gestión de clientes</h2>
+                <p>Administra la información de tus clientes</p>
+            </div>
+
+            <div class="IconosSuperiores">
+                <i class="bi bi-gear"></i>
+                <i class="bi bi-bell"></i>
+                <i class="bi bi-person-circle"></i>
+            </div>
+        </nav>
+
+        <section class="PanelClientes">
+
+            <div class="TarjetasClientes">
+
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div>
+                        <p>Total de clientes</p>
+                        <h1 id="totalClientes">8</h1>
+                        <small>Clientes registrados</small>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    <div>
+                        <p>Con teléfono</p>
+                        <h1 id="totalTelefonos">8</h1>
+                        <small>Información de contacto</small>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <div>
+                        <p>Con correo</p>
+                        <h1 id="totalCorreos">8</h1>
+                        <small>Correos registrados</small>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <div>
+                        <p>Con dirección</p>
+                        <h1 id="totalDirecciones">8</h1>
+                        <small>Direcciones registradas</small>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="BarraAcciones">
+                <div class="Buscador">
+                    <i class="bi bi-search"></i>
+                    <input
+                        type="text"
+                        id="buscarCliente"
+                        placeholder="Buscar por nombre, teléfono o correo..."
+                    >
+                </div>
+
+                <button class="BotonNuevo" id="btnNuevoCliente">
+                    <i class="bi bi-person-plus"></i>
+                    Nuevo cliente
+                </button>
+            </div>
+
+            <div class="ZonaTrabajo">
+
+                <section class="ContenedorTabla">
+                    <div class="TituloTabla">
+                        <div>
+                            <h3>Directorio de clientes</h3>
+                            <p>Información de tus clientes registrados</p>
+                        </div>
+                        <i class="bi bi-three-dots"></i>
+                    </div>
+
+                    <div class="TablaDesplazable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Teléfono</th>
+                                    <th>Correo</th>
+                                    <th>Dirección</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="listaClientes">
+                                <tr>
+                                    <td>Ana López</td>
+                                    <td>9876-5432</td>
+                                    <td>ana@email.com</td>
+                                    <td>Danlí</td>
+                                    <td class="Acciones">
+                                        <button title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>María García</td>
+                                    <td>9901-2345</td>
+                                    <td>maria@email.com</td>
+                                    <td>Danlí</td>
+                                    <td class="Acciones">
+                                        <button title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Carlos Méndez</td>
+                                    <td>9654-3210</td>
+                                    <td>carlos@email.com</td>
+                                    <td>Danlí</td>
+                                    <td class="Acciones">
+                                        <button title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Sofía Torres</td>
+                                    <td>9987-6543</td>
+                                    <td>sofia@email.com</td>
+                                    <td>Danlí</td>
+                                    <td class="Acciones">
+                                        <button title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Luis Herrera</td>
+                                    <td>9765-4321</td>
+                                    <td>luis@email.com</td>
+                                    <td>Danlí</td>
+                                    <td class="Acciones">
+                                        <button title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Valentina Cruz</td>
+                                    <td>9932-1188</td>
+                                    <td>valentina@email.com</td>
+                                    <td>Danlí</td>
+                                    <td class="Acciones">
+                                        <button title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>José Ramírez</td>
+                                    <td>9723-6677</td>
+                                    <td>jose@email.com</td>
+                                    <td>Danlí</td>
+                                    <td class="Acciones">
+                                        <button title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Daniela Flores</td>
+                                    <td>9944-5566</td>
+                                    <td>daniela@email.com</td>
+                                    <td>Danlí</td>
+                                    <td class="Acciones">
+                                        <button title="Editar">
+                                            <i class="bi bi-pencil"></i>
+                                        </button>
+                                        <button title="Eliminar">
+                                            <i class="bi bi-trash3"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="PieTabla">
+                        <span>Mostrando clientes de ejemplo</span>
+                        <span class="Indicador">
+                            <i class="bi bi-circle-fill"></i>
+                            Vista de prueba
+                        </span>
+                    </div>
+                </section>
+
+                <section class="FormularioCliente" id="formularioCliente">
+                    <div class="TituloFormulario">
+                        <i class="bi bi-person-vcard"></i>
+                        <div>
+                            <h3>Datos del cliente</h3>
+                            <p>Completa la información</p>
+                        </div>
+                    </div>
+
+                    <form id="formCliente">
+
+                        <input type="hidden" id="idCliente">
+
+                        <label for="nombreCliente">Nombre completo *</label>
+                        <input
+                            type="text"
+                            id="nombreCliente"
+                            placeholder="Ej. Ana López"
+                            required
+                        >
+
+                        <label for="numeroCliente">Teléfono</label>
+                        <input
+                            type="tel"
+                            id="numeroCliente"
+                            placeholder="Ej. 9876-5432"
+                        >
+
+                        <label for="correoCliente">Correo electrónico</label>
+                        <input
+                            type="email"
+                            id="correoCliente"
+                            placeholder="Ej. correo@ejemplo.com"
+                        >
+
+                        <label for="direccionCliente">Dirección</label>
+                        <textarea
+                            id="direccionCliente"
+                            placeholder="Colonia, barrio o ciudad"
+                            rows="3"
+                        ></textarea>
+
+                        <div class="BotonesFormulario">
+                            <button type="submit" class="BotonGuardar">
+                                <i class="bi bi-floppy"></i>
+                                Guardar
+                            </button>
+
+                            <button
+                                type="button"
+                                class="BotonCancelar"
+                                id="btnCancelar"
+                            >
+                                <i class="bi bi-x-lg"></i>
+                                Cancelar
+                            </button>
+                        </div>
+
+                    </form>
+                </section>
+
+            </div>
+
+        </section>
+    </main>
+
+</body>
+</html>

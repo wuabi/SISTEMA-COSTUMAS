@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel principal</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="pp2.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <section class="Lateral">
+        <img src="LogoBlancoCostuBorgoñaMas.png" alt="LOGO" class="LogoMenu">
+        <button><i class="bi bi-house-door"></i>Panel principal</button>
+        <button onclick="window.location.href='gestionclientes.html'">
+        <i class="bi bi-people"></i>Gestión de clientes</button>
+
+        <button><i class="bi bi-pencil-square"></i>Gestión de medidas</button>
+        <button><i class="bi bi-clipboard2-plus"></i>Encargos</button>
+        <button><i class="bi bi-clipboard2-check"></i>Entregas</button>
+        <button><i class="bi bi-cash-coin"></i>Pagos</button>
+        <button><i class="bi bi-graph-up-arrow"></i>Reportes</button>
+    </section>
+    <section class="Contenido">
+        <nav>
+            <h2>Inicio</h2>
+            <span>
+                <i class="bi bi-gear button"></i>
+                <i class="bi bi-bell button"></i>
+                <i class="bi bi-person-circle button"></i>
+            </span>
+        </nav>
+        <section class="Bento">
+            <div class="EncargosActivos">
+                <h4>Encargos activos:</h4>
+                <h1>67</h1>
+            </div>
+            <div class="Ingresos">
+                <h4>Ingresos mensuales</h4>
+                <h1>6767</h1>
+            </div>
+            <div class="EntregasPendientes">
+                <h4>Entregas pendientes</h4>
+                <h1>6</h1>
+            </div>
+            <div class="ActividadesClientes">
+                <h4>Actividades recientes de clientes</h4>
+                <div class="Actividades">
+                    <span>
+                        <h4>Elemento01</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento02</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento03</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento04</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento05</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento06</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento07</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento08</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento09</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento10</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                    <span>
+                        <h4>Elemento11</h4>
+                        <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                            <option value="pendiente" selected>Pendiente</option>
+                            <option value="enProceso">En proceso</option>
+                            <option value="terminado">Terminado</option>
+                            <option value="entregado">Entregado</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="EstadoEncargos">
+                <h4>Gráfico de pastel</h4>
+                <div style="width: 100%; max-width: 200px; margin: auto;">
+                    <canvas id="graficoEncargos"></canvas>
+                </div>
+                <span>pendiente, en proceso, terminado y entregado.</span>
+            </div>
+        </section>
+    </section>
+
+    <!-- Script de lógica, gráficos y actualización automática -->
+    <script>
+        const ctx = document.getElementById('graficoEncargos').getContext('2d');
+        const graficoPastel = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Pendiente', 'En Proceso', 'Terminado', 'Entregado'],
+                datasets: [{
+                    data: [11, 0, 0, 0], // Arranca con los 11 elementos en Pendiente
+                    backgroundColor: [
+                        '#9b0b43', // Borgoña (Pendiente)
+                        '#d97706', // Naranja (En Proceso)
+                        '#2563eb', // Azul (Terminado)
+                        '#16a34a'  // Verde (Entregado)
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#7d8184',
+                            boxWidth: 10,
+                            font: { size: 10 }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Función para recalcular y actualizar el gráfico al cambiar cualquier selector
+        function recalcularYActualizarGrafico() {
+            let pendientes = 0;
+            let enProceso = 0;
+            let terminados = 0;
+            let entregados = 0;
+
+            const selects = document.querySelectorAll('.selector-estado');
+
+            selects.forEach(select => {
+                if (select.value === 'pendiente') pendientes++;
+                if (select.value === 'enProceso') enProceso++;
+                if (select.value === 'terminado') terminados++;
+                if (select.value === 'entregado') entregados++;
+            });
+
+            graficoPastel.data.datasets[0].data = [pendientes, enProceso, terminados, entregados];
+            graficoPastel.update();
+        }
+
+        // Función auxiliar por si quieres agregar un nuevo pedido dinámicamente desde otro botón o formulario
+        function agregarNuevoPedido(nombreElemento) {
+            const lista = document.querySelector('.Actividades');
+            const nuevoSpan = document.createElement('span');
+            nuevoSpan.innerHTML = `
+                <h4>${nombreElemento}</h4>
+                <select class="selector-estado" onchange="recalcularYActualizarGrafico()">
+                    <option value="pendiente" selected>Pendiente</option>
+                    <option value="enProceso">En proceso</option>
+                    <option value="terminado">Terminado</option>
+                    <option value="entregado">Entregado</option>
+                </select>
+            `;
+            lista.appendChild(nuevoSpan);
+            recalcularYActualizarGrafico();
+        }
+    </script>
+
+</body>
+</html>
