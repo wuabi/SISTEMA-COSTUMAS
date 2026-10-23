@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+:root {
+    --borgona: #9b0b43;
+    --borgona-claro: #e83e79;
+    --borgona-suave: rgba(155, 11, 67, 0.16);
+}
+
 body {
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
@@ -14,7 +20,7 @@ body {
             rgba(14, 17, 19, 0.72),
             rgba(14, 17, 19, 0.72)
         ),
-        url("../assets/fondo-costura5.png");
+        url("../assets/fondo-costura6.png");
 
     background-size: cover;
     background-position: center;
@@ -55,8 +61,8 @@ body {
     align-items: center;
     gap: 16px;
     padding: 42px 28px;
-    background: linear-gradient(135deg, rgba(28, 37, 42, 0.9), rgba(12, 17, 19, 0.7));
-    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    background: #191719;
+    border-right: 1px solid rgba(155, 11, 67, 0.45);
 }
 
 .brand-badge {
@@ -64,14 +70,14 @@ body {
     align-items: center;
     justify-content: center;
     padding: 8px 16px;
-    border: 1px solid rgba(116, 205, 232, 0.5);
+    border: 1px solid rgba(232, 62, 121, 0.5);
     border-radius: 999px;
-    color: #7fdaf3;
+    color: #ff6b9f;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    background: rgba(87, 188, 212, 0.08);
+    background: var(--borgona-suave);
 }
 
 .logo {
@@ -87,7 +93,7 @@ body {
 .brand-text {
     max-width: 260px;
     text-align: center;
-    color: rgba(232, 236, 238, 0.82);
+    color: rgba(239, 228, 233, 0.86);
     font-size: 14px;
     line-height: 1.5;
 }
@@ -111,7 +117,7 @@ body {
 .mini-label {
     display: inline-block;
     margin-bottom: 10px;
-    color: #7fdaf3;
+    color: var(--borgona-claro);
     font-size: 11px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -119,7 +125,7 @@ body {
 }
 
 .form-header h1 {
-    color: #73d3ef;
+    color: var(--borgona-claro);
     font-size: clamp(1.7rem, 2vw, 2.2rem);
     font-weight: 700;
 }
@@ -131,7 +137,7 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #dfe7eb;
+    color: #e4dce0;
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -144,8 +150,8 @@ body {
     padding: 0 14px;
 
     color: #ffffff;
-    background: rgba(42, 49, 54, 0.8);
-    border: 1px solid rgba(122, 136, 145, 0.7);
+    background: rgba(42, 31, 37, 0.88);
+    border: 1px solid rgba(170, 135, 148, 0.66);
     border-radius: 12px;
     outline: none;
 
@@ -155,12 +161,12 @@ body {
 }
 
 .form-group input::placeholder {
-    color: #a4adb6;
+    color: #b8aab0;
 }
 
 .form-group input:focus {
-    border-color: #73d3ef;
-    box-shadow: 0 0 0 4px rgba(115, 211, 239, 0.12);
+    border-color: var(--borgona-claro);
+    box-shadow: 0 0 0 4px rgba(232, 62, 121, 0.16);
     transform: translateY(-1px);
 }
 
@@ -176,8 +182,8 @@ body {
     height: 46px;
     margin-top: 4px;
 
-    color: #0d1f26;
-    background: linear-gradient(135deg, #66d3eb, #4bb5d7);
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--borgona), #bd1458);
     border: none;
     border-radius: 12px;
 
@@ -187,7 +193,7 @@ body {
 
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-    box-shadow: 0 14px 24px rgba(78, 180, 214, 0.26);
+    box-shadow: 0 14px 24px rgba(155, 11, 67, 0.3);
 }
 
 #btnLogin:hover {
@@ -210,12 +216,12 @@ body {
     width: 16px;
     height: 16px;
     margin: 0;
-    accent-color: #63d2eb;
+    accent-color: var(--borgona);
     cursor: pointer;
 }
 
 .remember-container label {
-    color: #dce4e8;
+    color: #e4dce0;
     font-size: 12px;
     cursor: pointer;
 }
