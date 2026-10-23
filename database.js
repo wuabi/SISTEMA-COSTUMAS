@@ -4,7 +4,7 @@ const conexion = mysql.createConnection({ //Con esto creamos lo que es la conexi
     host: "localhost", //El servidor donde se encuentra nuestra base de datos
     user: "root", //Nuestro usuario de MySQL
     password: "1234", //Contraseña
-    database: "sistema_COSTUMAS2" //El nombre de la base de datos
+    database: "sistema_COSTUMAS" //El nombre de la base de datos
     //pov: no lo pude dejar solo como empresa ya que tenia una base de datos con ese nombre
 });
 
