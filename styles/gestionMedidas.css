@@ -1,0 +1,691 @@
+@import url("./navigation.css");
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--fondo: #0e1116;
+	--panel: #1f2326;
+	--panel-hover: #292d31;
+	--borde: #383c3f;
+	--texto: #f2f2f2;
+	--texto-secundario: #92979b;
+	--borgona: #9b0b43;
+	--borgona-claro: #e83e79;
+	--verde: #22c55e;
+	--acento-frio: #63c5b5;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	color: var(--texto);
+	background-color: var(--fondo);
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.ContenidoMedidas {
+	flex: 1;
+	min-width: 0;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.BarraSuperior {
+	min-height: 92px;
+	padding: 1.2rem 1.8rem;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	background-color: var(--panel);
+	border-bottom: 1px solid var(--borde);
+}
+
+.BarraSuperior h1 {
+	margin-bottom: 0.45rem;
+	color: white;
+	font-size: 1.45rem;
+}
+
+.BarraSuperior p {
+	color: var(--texto-secundario);
+	font-size: 0.85rem;
+}
+
+.IconosSuperiores {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.IconosSuperiores button {
+	width: 38px;
+	height: 38px;
+	display: grid;
+	place-items: center;
+	color: var(--texto-secundario);
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 0.5rem;
+	cursor: pointer;
+}
+
+.IconosSuperiores button:hover,
+.IconosSuperiores button:focus-visible {
+	color: var(--borgona-claro);
+	border-color: var(--borde);
+}
+
+.IconosSuperiores i {
+	font-size: 1.2rem;
+}
+
+.PanelMedidas {
+	flex: 1;
+	padding: 1.6rem;
+}
+
+.ResumenMedidas {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(220px, 1.25fr);
+	gap: 1rem;
+	margin-bottom: 1.4rem;
+}
+
+.ResumenItem,
+.NotaUnidad {
+	min-width: 0;
+	min-height: 92px;
+	display: flex;
+	align-items: center;
+	gap: 0.9rem;
+	padding: 1rem 1.1rem;
+	background: linear-gradient(145deg, #22272b, #1b1f22);
+	border: 1px solid var(--borde);
+	border-radius: 0.7rem;
+}
+
+.IconoResumen,
+.IconoFormulario {
+	width: 44px;
+	height: 44px;
+	flex: 0 0 44px;
+	display: grid;
+	place-items: center;
+	color: var(--borgona-claro);
+	background: rgba(155, 11, 67, 0.2);
+	border: 1px solid rgba(232, 62, 121, 0.2);
+	border-radius: 0.65rem;
+	font-size: 1.3rem;
+}
+
+.IconoResumen.IconoVerde {
+	color: var(--acento-frio);
+	background: rgba(99, 197, 181, 0.1);
+	border-color: rgba(99, 197, 181, 0.2);
+}
+
+.ResumenItem p {
+	margin-bottom: 0.25rem;
+	color: var(--texto-secundario);
+	font-size: 0.78rem;
+}
+
+.ResumenItem strong {
+	color: white;
+	font-size: 1.4rem;
+}
+
+.NotaUnidad {
+	color: var(--acento-frio);
+	background: rgba(99, 197, 181, 0.06);
+	border-color: rgba(99, 197, 181, 0.2);
+}
+
+.NotaUnidad i {
+	flex: 0 0 auto;
+	font-size: 1.15rem;
+}
+
+.NotaUnidad p {
+	color: #b8c9c6;
+	font-size: 0.8rem;
+	line-height: 1.5;
+}
+
+.BarraAcciones {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1.2rem;
+}
+
+.Buscador {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+	padding: 0.85rem 1rem;
+	background: var(--panel);
+	border: 1px solid var(--borde);
+	border-radius: 0.6rem;
+}
+
+.Buscador:focus-within {
+	border-color: var(--borgona-claro);
+}
+
+.Buscador i {
+	color: var(--borgona-claro);
+}
+
+.Buscador input {
+	width: 100%;
+	min-width: 0;
+	color: white;
+	background: transparent;
+	border: 0;
+	outline: 0;
+	font: inherit;
+	font-size: 0.85rem;
+}
+
+.Buscador input::placeholder,
+.FormularioMedida input::placeholder,
+.FormularioMedida textarea::placeholder {
+	color: #777f84;
+}
+
+.BotonNuevo {
+	min-height: 44px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.55rem;
+	padding: 0.75rem 1.1rem;
+	color: white;
+	background: linear-gradient(135deg, #9b0b43, #bd1458);
+	border: 1px solid #b51a53;
+	border-radius: 0.6rem;
+	font-size: 0.85rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background-color 0.2s, transform 0.2s;
+}
+
+.BotonNuevo:hover {
+	background: #bd1458;
+	transform: translateY(-1px);
+}
+
+.ZonaTrabajo {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(290px, 340px);
+	align-items: start;
+	gap: 1.1rem;
+}
+
+.ContenedorTabla,
+.FormularioMedida {
+	min-width: 0;
+	overflow: hidden;
+	background-color: var(--panel);
+	border: 1px solid var(--borde);
+	border-radius: 0.7rem;
+}
+
+.TituloTabla,
+.TituloFormulario {
+	min-height: 78px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1.1rem 1.2rem;
+	border-bottom: 1px solid var(--borde);
+}
+
+.TituloTabla h2,
+.TituloFormulario h2 {
+	margin-bottom: 0.35rem;
+	color: white;
+	font-size: 1rem;
+}
+
+.TituloTabla p,
+.TituloFormulario p {
+	color: var(--texto-secundario);
+	font-size: 0.76rem;
+}
+
+.TituloTabla > i {
+	color: var(--texto-secundario);
+	font-size: 1.25rem;
+}
+
+.TablaDesplazable {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.TablaDesplazable table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.TablaDesplazable th,
+.TablaDesplazable td {
+	padding: 0.9rem 0.75rem;
+	border-bottom: 1px solid #303539;
+}
+
+.TablaDesplazable th {
+	color: #e86b96;
+	background: #191d20;
+	font-size: 0.7rem;
+	font-weight: 600;
+}
+
+.TablaDesplazable td {
+	color: #d5d8da;
+	font-size: 0.76rem;
+}
+
+.FilaVacia td {
+	height: 250px;
+	text-align: center;
+	white-space: normal;
+}
+
+.FilaVacia td > * {
+	display: block;
+}
+
+.FilaVacia strong {
+	margin: 0.6rem 0 0.35rem;
+	color: #d5d8da;
+	font-size: 0.85rem;
+}
+
+.FilaVacia td > span:last-child {
+	color: var(--texto-secundario);
+	font-size: 0.76rem;
+}
+
+.IconoVacio {
+	color: #737b80;
+	font-size: 1.7rem;
+}
+
+.PieTabla {
+	min-height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	padding: 0.8rem 1.1rem;
+	color: var(--texto-secundario);
+	border-top: 1px solid var(--borde);
+	font-size: 0.72rem;
+}
+
+.Indicador {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.Indicador i {
+	color: #777f84;
+	font-size: 0.55rem;
+}
+
+.TituloFormulario {
+	justify-content: flex-start;
+	padding: 1rem 1.1rem;
+}
+
+.IconoFormulario {
+	width: 40px;
+	height: 40px;
+	flex-basis: 40px;
+}
+
+.FormularioMedida form {
+	display: flex;
+	flex-direction: column;
+	padding: 1.1rem;
+}
+
+.FormularioMedida label {
+	margin-bottom: 0.45rem;
+	color: #c5c9cc;
+	font-size: 0.76rem;
+}
+
+.FormularioMedida label span {
+	color: var(--borgona-claro);
+}
+
+.FormularioMedida select,
+.FormularioMedida input,
+.FormularioMedida textarea {
+	width: 100%;
+	min-width: 0;
+	margin-bottom: 0.9rem;
+	padding: 0.72rem;
+	color: white;
+	background-color: #15191c;
+	border: 1px solid var(--borde);
+	border-radius: 0.45rem;
+	outline: none;
+	font: inherit;
+	font-size: 0.78rem;
+}
+
+.FormularioMedida select:focus,
+.FormularioMedida input:focus,
+.FormularioMedida textarea:focus {
+	border-color: var(--borgona-claro);
+	box-shadow: 0 0 0 2px rgba(232, 62, 121, 0.1);
+}
+
+.FormularioMedida select:invalid {
+	color: #777f84;
+}
+
+.FormularioMedida select option {
+	color: white;
+	background-color: #15191c;
+}
+
+.EncabezadoMedidas {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0.1rem 0 0.7rem;
+}
+
+.EncabezadoMedidas h3 {
+	color: #e5e7e8;
+	font-size: 0.82rem;
+}
+
+.EncabezadoMedidas span {
+	padding: 0.25rem 0.45rem;
+	color: var(--acento-frio);
+	background: rgba(99, 197, 181, 0.1);
+	border-radius: 0.3rem;
+	font-size: 0.68rem;
+}
+
+.CamposMedidas {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	column-gap: 0.7rem;
+}
+
+.CampoMedida {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.EntradaMedida {
+	position: relative;
+}
+
+.EntradaMedida input {
+	padding-right: 2rem;
+}
+
+.EntradaMedida span {
+	position: absolute;
+	top: 50%;
+	right: 0.65rem;
+	color: var(--texto-secundario);
+	font-size: 0.68rem;
+	transform: translateY(-70%);
+	pointer-events: none;
+}
+
+.FormularioMedida textarea {
+	min-height: 76px;
+	resize: vertical;
+}
+
+.BotonesFormulario {
+	display: flex;
+	gap: 0.6rem;
+	margin-top: 0.2rem;
+}
+
+.BotonesFormulario button {
+	min-height: 42px;
+	flex: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.45rem;
+	padding: 0.65rem 0.5rem;
+	border-radius: 0.45rem;
+	font-size: 0.76rem;
+	font-weight: 700;
+	cursor: pointer;
+	transition: background-color 0.2s, border-color 0.2s;
+}
+
+.BotonGuardar {
+	color: white;
+	background: var(--borgona);
+	border: 1px solid var(--borgona);
+}
+
+.BotonGuardar:hover {
+	background: #bd1458;
+}
+
+.BotonCancelar {
+	color: var(--texto-secundario);
+	background: transparent;
+	border: 1px solid var(--borde);
+}
+
+.BotonCancelar:hover {
+	color: white;
+	border-color: #737b80;
+}
+
+.SoloLectores {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	clip-path: inset(50%);
+}
+
+@media (max-width: 1120px) {
+	.ResumenMedidas {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.NotaUnidad {
+		grid-column: 1 / -1;
+		min-height: 64px;
+	}
+
+	.ZonaTrabajo {
+		grid-template-columns: minmax(0, 1fr) 300px;
+	}
+}
+
+@media (max-width: 900px) {
+	.ZonaTrabajo {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.FormularioMedida {
+		max-width: none;
+	}
+
+	.FormularioMedida form {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		column-gap: 1rem;
+	}
+
+	.FormularioMedida form > label,
+	.FormularioMedida form > select,
+	.EncabezadoMedidas,
+	.CamposMedidas,
+	.FormularioMedida textarea,
+	.BotonesFormulario {
+		grid-column: 1 / -1;
+	}
+
+	.CamposMedidas {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 700px) {
+	body {
+		flex-direction: column;
+	}
+
+	.Lateral {
+		width: 100%;
+		min-height: auto;
+		flex: 0 0 auto;
+		flex-direction: row;
+		justify-content: flex-start;
+		gap: 0.4rem;
+		overflow-x: auto;
+		padding: 0.6rem;
+	}
+
+	.LogoMenu {
+		width: 90px;
+		min-width: 90px;
+		margin: 0 0.4rem 0 0;
+		padding: 0.2rem;
+	}
+
+	.Lateral button {
+		width: auto;
+		min-width: 48px;
+		min-height: 42px;
+		flex: 0 0 auto;
+		justify-content: center;
+		padding: 0.65rem;
+		font-size: 0;
+	}
+
+	.Lateral button i {
+		font-size: 1.1rem;
+	}
+
+	.ContenidoMedidas {
+		min-height: 0;
+	}
+
+	.BarraSuperior {
+		min-height: 76px;
+		padding: 1rem;
+	}
+
+	.BarraSuperior h1 {
+		font-size: 1.2rem;
+	}
+
+	.BarraSuperior p {
+		max-width: 240px;
+		line-height: 1.4;
+	}
+
+	.IconosSuperiores {
+		gap: 0.2rem;
+	}
+
+	.IconosSuperiores button {
+		width: 32px;
+		height: 36px;
+	}
+
+	.PanelMedidas {
+		padding: 1rem;
+	}
+
+	.ResumenMedidas {
+		gap: 0.7rem;
+	}
+
+	.ResumenItem {
+		min-height: 78px;
+		gap: 0.65rem;
+		padding: 0.75rem;
+	}
+
+	.IconoResumen {
+		width: 38px;
+		height: 38px;
+		flex-basis: 38px;
+		font-size: 1.1rem;
+	}
+
+	.ResumenItem p {
+		font-size: 0.7rem;
+	}
+
+	.BarraAcciones {
+		align-items: stretch;
+	}
+
+	.BotonNuevo {
+		width: 46px;
+		flex: 0 0 46px;
+		padding: 0;
+		font-size: 0;
+	}
+
+	.BotonNuevo i {
+		font-size: 1rem;
+	}
+
+	.FormularioMedida form {
+		display: flex;
+	}
+
+	.CamposMedidas {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 420px) {
+	.BarraSuperior {
+		align-items: flex-start;
+	}
+
+	.IconosSuperiores button:first-child {
+		display: none;
+	}
+
+	.NotaUnidad {
+		grid-column: 1 / -1;
+	}
+
+	.ResumenMedidas {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
