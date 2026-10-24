@@ -52,7 +52,7 @@ formulario.addEventListener("submit", function (evento) {
             return;
         }
 
-        mensaje.style.color = "#55bfdf";
+        mensaje.style.color = "#ef8497";
         mensaje.textContent = "Inicio de sesión exitoso.";
 
         console.log("Usuario autenticado:", {
