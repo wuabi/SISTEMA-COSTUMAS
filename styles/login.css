@@ -205,27 +205,6 @@ body {
     transform: translateY(0);
 }
 
-.remember-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 18px;
-}
-
-.remember-container input {
-    width: 16px;
-    height: 16px;
-    margin: 0;
-    accent-color: var(--borgona);
-    cursor: pointer;
-}
-
-.remember-container label {
-    color: #e4dce0;
-    font-size: 12px;
-    cursor: pointer;
-}
-
 @media (max-width: 760px) {
     .login-card {
         grid-template-columns: 1fr;
