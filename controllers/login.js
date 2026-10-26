@@ -1,4 +1,5 @@
 const { buscarUsuario } = require("../models/login");
+const { ipcRenderer } = require("electron");
 
 const formulario = document.getElementById("loginForm");
 const mensaje = document.getElementById("loginMessage");
@@ -62,8 +63,17 @@ formulario.addEventListener("submit", function (evento) {
             rol: datosUsuario.nombre_rol
         });
 
-        setTimeout(function () {
-            window.location.href = "../views/dashboard.html";
-        }, 500);
+        ipcRenderer.invoke("guardar-sesion", datosUsuario)
+            .then(function () {
+                setTimeout(function () {
+                    window.location.href = "../views/dashboard.html";
+                }, 500);
+            })
+            .catch(function (error) {
+                console.error("Error al guardar la sesión:", error);
+                mensaje.textContent = "No se pudo iniciar la sesión. Inténtelo de nuevo.";
+                boton.disabled = false;
+                boton.textContent = "Iniciar sesión";
+            });
     });
 });
