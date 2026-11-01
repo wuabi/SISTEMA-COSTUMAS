@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes y estadísticas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/reportes.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <aside class="Lateral">
+        <img src="../assets/logo-costumas4.png" alt="Logo Costumas" class="LogoMenu">
+        <button type="button" onclick="location.href='dashboard.html'"><i class="bi bi-house"></i> Panel principal</button>
+        <button type="button" onclick="location.href='gestionClientes.html'"><i class="bi bi-people"></i> Gestión de clientes</button>
+        <button type="button" onclick="location.href='gestionMedidas.html'"><i class="bi bi-pencil-square"></i> Gestión de medidas</button>
+        <button type="button" onclick="location.href='encargosclientes.html'"><i class="bi bi-clipboard2-plus"></i> Encargos</button>
+        <button type="button" onclick="location.href='encargosproveedores.html'"><i class="bi bi-truck"></i> Pedidos a proveedores</button>
+        <button type="button" onclick="location.href='gestionEntregas.html'"><i class="bi bi-clipboard2-check"></i> Entregas</button>
+        <button type="button" onclick="location.href='gestionPagos.html'"><i class="bi bi-cash-coin"></i> Pagos</button>
+        <button class="Activo" type="button" aria-current="page" onclick="location.href='gestionReportes.html'"><i class="bi bi-graph-up-arrow"></i> Reportes</button>
+    </aside>
+
+    <section class="Contenido">
+        <nav>
+            <div>
+                <h2>Reportes y estadísticas</h2>
+                <p>Consulta encargos, ventas, pagos e inventario</p>
+            </div>
+            <span>
+                <i class="bi bi-gear button"></i>
+                <i class="bi bi-bell button"></i>
+                <i class="bi bi-person-circle button"></i>
+            </span>
+        </nav>
+
+        <section class="Bento">
+
+            <!-- FILTROS -->
+            <div class="Filtros">
+                <div class="CampoSelect">
+                    <i class="bi bi-funnel"></i>
+                    <select id="tipoReporte">
+                        <option value="encargos" selected>Reporte de encargos</option>
+                        <option value="ventas">Reporte de ventas</option>
+                        <option value="pagos">Reporte de pagos</option>
+                        <option value="inventario">Reporte de inventario</option>
+                    </select>
+                </div>
+
+                <div class="SelectorPeriodo" id="selectorPeriodo">
+                    <button class="Activo" data-periodo="mes">Mes</button>
+                    <button data-periodo="trimestre">Trimestre</button>
+                    <button data-periodo="anio">Año</button>
+                </div>
+
+                <button class="BotonImprimir" id="btnImprimir" onclick="window.print()">
+                    <i class="bi bi-printer"></i>
+                    Imprimir reporte
+                </button>
+            </div>
+
+            <!-- TARJETAS (ejemplo) -->
+            <div class="FilaTarjetas" id="tarjetas">
+
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta"><i class="bi bi-clipboard2-plus"></i></div>
+                    <div>
+                        <p>Total de encargos</p>
+                        <h1 id="totalEncargos">50</h1>
+                        <small>En el periodo</small>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta"><i class="bi bi-activity"></i></div>
+                    <div>
+                        <p>Encargos activos</p>
+                        <h1 id="totalActivos">35</h1>
+                        <small>Aún sin entregar</small>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta"><i class="bi bi-clipboard2-check"></i></div>
+                    <div>
+                        <p>Entregados</p>
+                        <h1 id="totalEntregados">15</h1>
+                        <small>Encargos completados</small>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta"><i class="bi bi-percent"></i></div>
+                    <div>
+                        <p>Tasa de finalización</p>
+                        <h1 id="tasaFinalizacion">30%</h1>
+                        <small>Entregados / total</small>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- GRÁFICO DE BARRAS (ejemplo) -->
+            <div class="PanelBento Barras">
+                <div class="EncabezadoPanel">
+                    <div>
+                        <h4>Encargos por mes</h4>
+                        <p>Cantidad de encargos registrados</p>
+                    </div>
+                    <i class="bi bi-bar-chart"></i>
+                </div>
+                <div class="CajaGrafico">
+                    <canvas id="graficoBarras"></canvas>
+                </div>
+            </div>
+
+            <!-- PASTEL 1 (ejemplo) -->
+            <div class="PanelBento Pastel">
+                <div class="EncabezadoPanel">
+                    <div>
+                        <h4>Estado de los encargos</h4>
+                        <p>Pendiente, en proceso, terminado y entregado</p>
+                    </div>
+                    <i class="bi bi-pie-chart"></i>
+                </div>
+                <div class="CajaGrafico">
+                    <canvas id="graficoPastel1"></canvas>
+                </div>
+            </div>
+
+            <!-- PASTEL 2 (ejemplo) -->
+            <div class="PanelBento Pastel">
+                <div class="EncabezadoPanel">
+                    <div>
+                        <h4>Tipos de prenda solicitados</h4>
+                        <p>Prendas más pedidas</p>
+                    </div>
+                    <i class="bi bi-pie-chart"></i>
+                </div>
+                <div class="CajaGrafico">
+                    <canvas id="graficoPastel2"></canvas>
+                </div>
+            </div>
+
+            <!-- TABLA DE DETALLE (ejemplo) -->
+            <div class="PanelBento Detalle">
+                <div class="EncabezadoPanel">
+                    <div>
+                        <h4>Detalle de encargos</h4>
+                        <p>Registros del periodo seleccionado</p>
+                    </div>
+                    <i class="bi bi-three-dots"></i>
+                </div>
+
+                <div class="TablaDesplazable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>N°</th>
+                                <th>Cliente</th>
+                                <th>Prenda</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="listaReportes">
+                            <tr>
+                                <td>101</td>
+                                <td>Ana López</td>
+                                <td>Traje</td>
+                                <td><span class="Estado Entregado">Entregado</span></td>
+                                <td>28/10/2026</td>
+                                <td>L 2,800.00</td>
+                            </tr>
+                            <tr>
+                                <td>102</td>
+                                <td>María García</td>
+                                <td>Vestido</td>
+                                <td><span class="Estado Pendiente">Pendiente</span></td>
+                                <td>30/10/2026</td>
+                                <td>L 2,200.00</td>
+                            </tr>
+                            <tr>
+                                <td>103</td>
+                                <td>Carlos Méndez</td>
+                                <td>Camisa</td>
+                                <td><span class="Estado EnProceso">En proceso</span></td>
+                                <td>31/10/2026</td>
+                                <td>L 650.00</td>
+                            </tr>
+                            <tr>
+                                <td>104</td>
+                                <td>Sofía Torres</td>
+                                <td>Vestido</td>
+                                <td><span class="Estado Terminado">Terminado</span></td>
+                                <td>29/10/2026</td>
+                                <td>L 2,200.00</td>
+                            </tr>
+                            <tr>
+                                <td>105</td>
+                                <td>Luis Herrera</td>
+                                <td>Traje</td>
+                                <td><span class="Estado Entregado">Entregado</span></td>
+                                <td>25/10/2026</td>
+                                <td>L 2,800.00</td>
+                            </tr>
+                            <tr>
+                                <td>106</td>
+                                <td>Valentina Cruz</td>
+                                <td>Arreglo</td>
+                                <td><span class="Estado Pendiente">Pendiente</span></td>
+                                <td>01/11/2026</td>
+                                <td>L 250.00</td>
+                            </tr>
+                            <tr>
+                                <td>107</td>
+                                <td>José Ramírez</td>
+                                <td>Pantalón</td>
+                                <td><span class="Estado EnProceso">En proceso</span></td>
+                                <td>31/10/2026</td>
+                                <td>L 500.00</td>
+                            </tr>
+                            <tr>
+                                <td>108</td>
+                                <td>Daniela Flores</td>
+                                <td>Camisa</td>
+                                <td><span class="Estado Entregado">Entregado</span></td>
+                                <td>24/10/2026</td>
+                                <td>L 650.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="PieTabla">
+                    <span>Mostrando reportes de ejemplo</span>
+                    <span class="Indicador">
+                        <i class="bi bi-circle-fill"></i>
+                        Vista de prueba
+                    </span>
+                </div>
+            </div>
+
+        </section>
+    </section>
+
+    <!-- Gráficas de ejemplo (datos escritos a mano, para ver cómo se ve) -->
+    <script>
+        // Botones Mes / Trimestre / Año: solo cambian el botón activo (ejemplo visual)
+        document.querySelectorAll("#selectorPeriodo button").forEach(function (boton) {
+            boton.addEventListener("click", function () {
+                document.querySelector("#selectorPeriodo .Activo").classList.remove("Activo");
+                boton.classList.add("Activo");
+            });
+        });
+
+        const ChartJS = window.Chart || (typeof require === "function" ? require("chart.js/auto") : null);
+
+        if (ChartJS) {
+            ChartJS.defaults.color = "#92979b";
+
+            const opcionesPastel = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: "bottom",
+                        labels: { color: "#92979b", boxWidth: 10, font: { size: 11 } }
+                    }
+                }
+            };
+
+            // Barras: encargos por mes
+            new ChartJS(document.getElementById("graficoBarras"), {
+                type: "bar",
+                data: {
+                    labels: ["Jun", "Jul", "Ago", "Sep", "Oct", "Nov"],
+                    datasets: [{
+                        data: [6, 9, 7, 11, 10, 7],
+                        backgroundColor: "#9b0b43",
+                        hoverBackgroundColor: "#e83e79",
+                        borderRadius: 6,
+                        maxBarThickness: 40
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: "#92979b" } },
+                        y: { beginAtZero: true, grid: { color: "#2a2f33" }, ticks: { color: "#92979b" } }
+                    }
+                }
+            });
+
+            // Pastel 1: estado de los encargos (mismos colores del panel principal)
+            new ChartJS(document.getElementById("graficoPastel1"), {
+                type: "pie",
+                data: {
+                    labels: ["Pendiente", "En proceso", "Terminado", "Entregado"],
+                    datasets: [{
+                        data: [12, 14, 9, 15],
+                        backgroundColor: ["#9b0b43", "#d97706", "#2563eb", "#16a34a"],
+                        borderColor: "#1f2326",
+                        borderWidth: 2
+                    }]
+                },
+                options: opcionesPastel
+            });
+
+            // Pastel 2: tipos de prenda
+            new ChartJS(document.getElementById("graficoPastel2"), {
+                type: "pie",
+                data: {
+                    labels: ["Trajes", "Vestidos", "Camisas", "Pantalones", "Arreglos"],
+                    datasets: [{
+                        data: [19, 13, 10, 3, 5],
+                        backgroundColor: ["#9b0b43", "#d97706", "#2563eb", "#16a34a", "#e83e79"],
+                        borderColor: "#1f2326",
+                        borderWidth: 2
+                    }]
+                },
+                options: opcionesPastel
+            });
+        }
+    </script>
+</body>
+</html>
