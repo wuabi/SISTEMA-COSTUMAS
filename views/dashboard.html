@@ -1,13 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>COSTUMAS - Inicio</title>
-    </head>
-    <body>
-        <h1>Bienvenido a COSTUMAS</h1>
-        <p>Has iniciado sesión correctamente.</p>
-        <p>Esta es la pantalla principal provisional del sistema.</p>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel principal</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/navigation.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <aside class="Lateral">
+        <img src="../assets/logo-costumas4.png" alt="Logo Costumas" class="LogoMenu">
+        <button class="Activo" type="button" aria-current="page" onclick="location.href='dashboard.html'"><i class="bi bi-house"></i> Panel principal</button>
+        <button type="button" onclick="location.href='gestionClientes.html'"><i class="bi bi-people"></i> Gestión de clientes</button>
+        <button type="button" onclick="location.href='gestionMedidas.html'"><i class="bi bi-pencil-square"></i> Gestión de medidas</button>
+        <button type="button" onclick="location.href='encargosclientes.html'"><i class="bi bi-clipboard2-plus"></i> Encargos</button>
+        <button type="button" onclick="location.href='encargosproveedores.html'"><i class="bi bi-truck"></i> Pedidos a proveedores</button>
+        <button type="button" onclick="location.href='gestionEntregas.html'"><i class="bi bi-clipboard2-check"></i> Entregas</button>
+        <button type="button" onclick="location.href='gestionPagos.html'"><i class="bi bi-cash-coin"></i> Pagos</button>
+        <button type="button" onclick="location.href='gestionReportes.html'"><i class="bi bi-graph-up-arrow"></i> Reportes</button>
+    </aside>
+    <section class="Contenido">
+        <nav>
+            <div>
+                <h2>Inicio</h2>
+                <p>Resumen de actividad</p>
+            </div>
+            <div class="IconosSuperiores" aria-label="Accesos de usuario">
+                <!-- <button type="button" aria-label="Configuración"><i class="bi bi-gear"></i></button> -->
+                <button type="button" aria-label="Notificaciones"><i class="bi bi-bell"></i></button>
+                <button type="button" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+            </div>
+        </nav>
+        <p class="EstadoDashboard" id="estadoDashboard" role="status" hidden></p>
+        <section class="Bento">
+            <div class="EncargosActivos">
+                <h4>Encargos activos:</h4>
+                <h1 id="encargosActivos">—</h1>
+            </div>
+            <div class="Ingresos">
+                <h4>Ingresos mensuales</h4>
+                <h1 id="ingresosMensuales">—</h1>
+            </div>
+            <div class="EntregasPendientes">
+                <h4>Entregas pendientes</h4>
+                <h1 id="entregasPendientes">—</h1>
+            </div>
+            <div class="ActividadesClientes">
+                <h4>Actividades recientes de clientes</h4>
+                <div class="Actividades">
+                    <p>Cargando actividades...</p>
+                </div>
+            </div>
+            <div class="EstadoEncargos">
+                <h4>Gráfico de pastel</h4>
+                <div style="width: 100%; max-width: 200px; margin: auto;">
+                    <canvas id="graficoEncargos"></canvas>
+                </div>
+                <span id="estadoGrafico">Cargando gráfico...</span>
+            </div>
+        </section>
+    </section>
+    <script src="../controllers/dashboard.js"></script>
+    <script src="../controllers/notificaciones.js"></script>
+    <script src="../controllers/perfil.js"></script>
+</body>
 </html>
