@@ -10,8 +10,14 @@ const listaClientes = document.getElementById("listaClientes");
 const buscador = document.getElementById("buscarCliente");
 const botonNuevo = document.getElementById("btnNuevoCliente");
 const botonCancelar = document.getElementById("btnCancelar");
+const panelFormulario = document.getElementById("formularioCliente");
 const pieTabla = document.querySelector(".PieTabla");
 let clientes = [];
+
+function mostrarFormulario(mostrar) {
+	panelFormulario.hidden = !mostrar;
+	botonNuevo.setAttribute("aria-expanded", String(mostrar));
+}
 
 function actualizarEstadisticas() {
 	document.getElementById("totalClientes").textContent = clientes.length;
@@ -76,7 +82,7 @@ function renderizarClientes() {
 	});
 
 	pieTabla.firstElementChild.textContent = `Mostrando ${filtrados.length} de ${clientes.length} clientes`;
-	pieTabla.querySelector(".Indicador").lastChild.textContent = " Datos de MySQL";
+	pieTabla.querySelector(".Indicador").lastChild.textContent = " Actualizado";
 	actualizarEstadisticas();
 }
 
@@ -86,7 +92,7 @@ function cargarClientes() {
 			console.error("Error al cargar clientes:", error);
 			clientes = [];
 			renderizarClientes();
-			pieTabla.querySelector(".Indicador").lastChild.textContent = " Error de conexión";
+			pieTabla.querySelector(".Indicador").lastChild.textContent = " No se pudieron cargar los clientes";
 			return;
 		}
 
@@ -102,6 +108,7 @@ function editarCliente(cliente) {
 	document.getElementById("correoCliente").value = cliente.correo || "";
 	document.getElementById("direccionCliente").value = cliente.direccion || "";
 	document.querySelector(".TituloFormulario h3").textContent = "Editar cliente";
+	mostrarFormulario(true);
 	formulario.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
@@ -149,18 +156,28 @@ formulario.addEventListener("submit", evento => {
 		}
 
 		limpiarFormulario();
+		mostrarFormulario(false);
 		cargarClientes();
 	});
 });
 
 buscador.addEventListener("input", renderizarClientes);
 botonNuevo.addEventListener("click", () => {
+	if (!panelFormulario.hidden) {
+		mostrarFormulario(false);
+		return;
+	}
+
 	limpiarFormulario();
+	mostrarFormulario(true);
 	document.getElementById("nombreCliente").focus();
 });
-botonCancelar.addEventListener("click", limpiarFormulario);
+botonCancelar.addEventListener("click", () => {
+	limpiarFormulario();
+	mostrarFormulario(false);
+});
 
 listaClientes.replaceChildren();
 pieTabla.firstElementChild.textContent = "Cargando clientes...";
-pieTabla.querySelector(".Indicador").lastChild.textContent = " Conectando con MySQL";
+pieTabla.querySelector(".Indicador").lastChild.textContent = " Cargando clientes";
 cargarClientes();
