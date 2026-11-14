@@ -2,9 +2,14 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 
 let usuarioAutenticado = null;
+const rolesPermitidos = new Set(['Administrador', 'Gerente', 'Empleado']);
 
 ipcMain.handle('guardar-sesion', (_evento, usuario) => {
-    if (!usuario || !Number.isInteger(Number(usuario.id_usuario))) {
+    if (
+        !usuario ||
+        !Number.isInteger(Number(usuario.id_usuario)) ||
+        !rolesPermitidos.has(String(usuario.nombre_rol || ''))
+    ) {
         throw new Error('No se pudo guardar la sesión del usuario.');
     }
 
@@ -20,6 +25,10 @@ ipcMain.handle('guardar-sesion', (_evento, usuario) => {
 });
 
 ipcMain.handle('obtener-sesion', () => usuarioAutenticado);
+ipcMain.on('obtener-sesion-sincrono', (evento) => {
+    evento.returnValue = usuarioAutenticado;
+});
+
 ipcMain.handle('cerrar-sesion', () => {
     usuarioAutenticado = null;
 });
