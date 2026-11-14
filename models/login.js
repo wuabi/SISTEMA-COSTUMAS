@@ -1,4 +1,18 @@
+const crypto = require("crypto");
 const conexion = require("../database");
+
+function hashearContrasena(contrasena) {
+    return crypto.createHash("sha256").update(String(contrasena)).digest("hex");
+}
+
+function compararContrasena(contrasenaIngresada, contrasenaGuardada) {
+    if (!contrasenaIngresada || !contrasenaGuardada) {
+        return false;
+    }
+
+    const valorIngresado = hashearContrasena(contrasenaIngresada);
+    return valorIngresado === contrasenaGuardada || String(contrasenaIngresada) === String(contrasenaGuardada);
+}
 
 function buscarUsuario(correo, callback) {
     const sql = `
@@ -50,18 +64,19 @@ function cambiarContrasena(idUsuario, contrasenaActual, contrasenaNueva, callbac
             return;
         }
 
-        if (resultados.length === 0 || resultados[0].contrasena !== contrasenaActual) {
+        if (resultados.length === 0 || !compararContrasena(contrasenaActual, resultados[0].contrasena)) {
             callback(null, false);
             return;
         }
 
+        const contrasenaHasheada = hashearContrasena(contrasenaNueva);
         const actualizacion = `
             UPDATE Usuarios
             SET contrasena = ?
             WHERE id_usuario = ?
         `;
 
-        conexion.query(actualizacion, [contrasenaNueva, idUsuario], function(errorActualizacion) {
+        conexion.query(actualizacion, [contrasenaHasheada, idUsuario], function(errorActualizacion) {
             callback(errorActualizacion || null, !errorActualizacion);
         });
     });
@@ -70,5 +85,7 @@ function cambiarContrasena(idUsuario, contrasenaActual, contrasenaNueva, callbac
 module.exports = {
     buscarUsuario,
     actualizarPerfil,
-    cambiarContrasena
+    cambiarContrasena,
+    compararContrasena,
+    hashearContrasena
 };
