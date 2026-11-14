@@ -1,11 +1,11 @@
 const mysql = require("mysql2"); //Importamos la libreria mysql2 para conectar a MySQL
 
-const conexion = mysql.createConnection({ //Con esto creamos lo que es la conexion
-    host: "localhost", //El servidor donde se encuentra nuestra base de datos
-    user: "root", //Nuestro usuario de MySQL
-    password: "1234", //Contraseña
-    database: "sistema_COSTUMAS" //El nombre de la base de datos
-    //pov: no lo pude dejar solo como empresa ya que tenia una base de datos con ese nombre
+const conexion = mysql.createConnection({
+    host: process.env.DB_HOST || "localhost",
+    port: Number(process.env.DB_PORT || 3306),
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "1234",
+    database: process.env.DB_NAME || "sistema_COSTUMAS3"
 });
 
 conexion.connect((error)=>{ //En esta parte hacemos la conexion a la base de datos
