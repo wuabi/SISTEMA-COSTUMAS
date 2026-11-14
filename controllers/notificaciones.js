@@ -80,7 +80,7 @@ function iniciarNotificaciones(boton) {
                 console.error("Error al cargar las notificaciones:", error);
                 contador.hidden = true;
                 boton.setAttribute("aria-label", "Notificaciones");
-                mostrarEstado("No se pudieron cargar las notificaciones. Verifica la conexión con la base de datos.");
+                mostrarEstado("No se pudieron cargar las notificaciones. Inténtalo de nuevo más tarde.");
                 return;
             }
 
