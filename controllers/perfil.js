@@ -1,5 +1,6 @@
+(() => {
 const { ipcRenderer } = require("electron");
-const { actualizarPerfil, cambiarContrasena } = require("../models/login");
+const { actualizarPerfil, cambiarContrasena, hashearContrasena } = require("../models/login");
 
 const botonPerfil = document.querySelector('.IconosSuperiores button[aria-label="Perfil"]');
 
@@ -389,3 +390,4 @@ function esContrasenaSegura(contrasena) {
         && /\d/.test(contrasena)
         && /[^A-Za-z0-9\s]/.test(contrasena);
 }
+})();
