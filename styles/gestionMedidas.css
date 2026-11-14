@@ -226,7 +226,7 @@ body {
 
 .ZonaTrabajo {
 	display: grid;
-	grid-template-columns: minmax(0, 1fr) minmax(290px, 340px);
+	grid-template-columns: minmax(0, 1fr);
 	align-items: start;
 	gap: 1.1rem;
 }
@@ -526,7 +526,7 @@ body {
 	}
 
 	.ZonaTrabajo {
-		grid-template-columns: minmax(0, 1fr) 300px;
+		grid-template-columns: minmax(0, 1fr);
 	}
 }
 
@@ -656,4 +656,31 @@ body {
 	.ResumenMedidas {
 		grid-template-columns: minmax(0, 1fr);
 	}
+}
+
+.Acciones {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.Acciones button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--borde);
+    border-radius: 0.45rem;
+    background-color: #252a2e;
+    color: var(--texto-secundario);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.Acciones button:hover {
+    background-color: var(--borgona);
+    color: white;
+    border-color: var(--borgona);
 }
