@@ -1,4 +1,4 @@
-const { buscarUsuario } = require("../models/login");
+const { buscarUsuario, compararContrasena } = require("../models/login");
 const { ipcRenderer } = require("electron");
 
 const formulario = document.getElementById("loginForm");
@@ -46,7 +46,7 @@ formulario.addEventListener("submit", function (evento) {
             return;
         }
 
-        if (contrasena !== datosUsuario.contrasena) {
+        if (!compararContrasena(contrasena, datosUsuario.contrasena)) {
             mensaje.textContent = "Correo o contraseña incorrectos.";
             boton.disabled = false;
             boton.textContent = "Iniciar sesión";
@@ -66,7 +66,10 @@ formulario.addEventListener("submit", function (evento) {
         ipcRenderer.invoke("guardar-sesion", datosUsuario)
             .then(function () {
                 setTimeout(function () {
-                    window.location.href = "../views/dashboard.html";
+                    const paginaInicial = datosUsuario.nombre_rol === "Empleado"
+                        ? "encargosclientes.html"
+                        : "dashboard.html";
+                    window.location.href = `../views/${paginaInicial}`;
                 }, 500);
             })
             .catch(function (error) {
