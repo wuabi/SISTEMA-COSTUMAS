@@ -1,0 +1,130 @@
+:root {
+    --color-acento: #e83e79;
+    --color-acento-fuerte: #9b0b43;
+    --color-texto: #f2f2f2;
+    --color-secundario: #92979b;
+    --color-borde: #383c3f;
+    --color-fondo: #0e1116;
+    --color-panel: #1f2326;
+    --color-interior: #15191c;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0; min-height: 100vh; display: flex; flex-direction: row;
+    color: var(--color-texto); background: var(--color-fondo);
+    font-family: Arial, Helvetica, sans-serif;
+}
+.ContenidoEntregas {
+    min-width: 0; flex: 1; height: 100vh; display: flex; flex-direction: column;
+    background: var(--color-fondo); overflow: auto;
+}
+.BarraSuperior {
+    min-height: 92px; padding: 1.2rem 1.8rem; display: flex;
+    justify-content: space-between; align-items: center; gap: 1rem;
+    color: var(--color-secundario); background: var(--color-panel);
+    border-bottom: 1px solid var(--color-borde);
+}
+.BarraSuperior h1 { margin: 0 0 .4rem; color: var(--color-texto); font-size: 1.45rem; }
+.BarraSuperior p { margin: 0; color: var(--color-secundario); font-size: .85rem; }
+.IconosSuperiores { display: flex; align-items: center; gap: 1rem; }
+.IconosSuperiores button {
+    width: 38px; height: 38px; display: grid; place-items: center;
+    color: var(--color-secundario); background: transparent;
+    border: 1px solid transparent; border-radius: .5rem; cursor: pointer;
+}
+.IconosSuperiores button:hover { color: var(--color-acento); border-color: var(--color-borde); }
+.IconosSuperiores i { font-size: 1.2rem; }
+.PaginaEntregas { flex: 1; min-height: 0; overflow: auto; padding: 1.5rem; }
+.ResumenEntregas {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem; margin-bottom: 1rem;
+}
+.TarjetaResumen, .PanelEntregas {
+    background: linear-gradient(145deg, #22272b, #1b1f22);
+    border: 1px solid var(--color-borde); border-radius: .9rem;
+    box-shadow: none;
+}
+.TarjetaResumen {
+    min-height: 112px; padding: 1.1rem 1.3rem; display: flex;
+    align-items: center; gap: 1rem; border-top: 2px solid var(--color-acento-fuerte);
+}
+.IconoResumen {
+    width: 46px; height: 46px; display: grid; place-items: center;
+    color: #ff8bb2; background: rgba(155,11,67,.2); border-radius: .7rem;
+    font-size: 1.35rem;
+}
+.IconoResumen.entregada { color: #75d69a; background: rgba(22,163,74,.14); }
+.TarjetaResumen p { margin: 0 0 .35rem; color: var(--color-secundario); font-size: .9rem; }
+.TarjetaResumen h2 { margin: 0; color: var(--color-texto); font-size: 1.8rem; }
+.PanelEntregas { padding: 1.2rem; margin-bottom: 1rem; }
+.PanelEncabezado {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem; margin-bottom: 1rem;
+}
+.PanelEncabezado h2 { margin: 0 0 .35rem; color: #dfe7eb; font-size: 1.08rem; }
+.PanelEncabezado p { margin: 0; color: var(--color-secundario); font-size: .85rem; }
+.EtiquetaSeccion {
+    padding: .45rem .7rem; color: #ff8bb2; background: rgba(155,11,67,.2);
+    border: 1px solid rgba(232,62,121,.25); border-radius: 2rem; font-size: .78rem;
+    white-space: nowrap;
+}
+.CampoBusqueda {
+    width: min(100%, 440px); display: flex; align-items: center; gap: .65rem;
+    margin-bottom: 1rem; padding: .65rem .85rem; color: var(--color-secundario);
+    background: var(--color-interior); border: 1px solid var(--color-borde);
+    border-radius: .55rem;
+}
+.CampoBusqueda input {
+    width: 100%; color: var(--color-texto); background: transparent;
+    border: 0; outline: 0; font-size: .9rem;
+}
+.TablaContenedor { width: 100%; overflow-x: auto; border: 1px solid var(--color-borde); border-radius: .6rem; }
+table { width: 100%; min-width: 850px; border-collapse: collapse; text-align: left; }
+thead { background: #15191c; }
+th, td { padding: .85rem .75rem; border-bottom: 1px solid var(--color-borde); font-size: .84rem; }
+th { color: #dfe7eb; font-weight: 600; white-space: nowrap; }
+td { color: #c4c9cc; }
+tbody tr:hover { background: rgba(255,255,255,.025); }
+tbody tr:last-child td { border-bottom: 0; }
+.IdPedido { color: #ff8bb2; font-weight: 700; white-space: nowrap; }
+.CampoFecha {
+    min-width: 135px; padding: .48rem .55rem; color: var(--color-texto);
+    color-scheme: dark; background: var(--color-interior);
+    border: 1px solid var(--color-borde); border-radius: .45rem; outline: none;
+}
+.CampoFecha:focus { border-color: var(--color-acento); }
+.AccionEntrega { display: flex; flex-direction: column; gap: .45rem; min-width: 145px; }
+.btn-entregar, .btn-secundario {
+    display: inline-flex; align-items: center; justify-content: center; gap: .45rem;
+    padding: .58rem .8rem; color: #fff; background: var(--color-acento-fuerte);
+    border: 1px solid #b51a58; border-radius: .5rem; cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+.btn-entregar:hover { background: #b51a58; transform: translateY(-1px); }
+.btn-entregar:disabled { opacity: .55; cursor: wait; transform: none; }
+.btn-secundario { color: var(--color-secundario); background: #252a2e; border-color: var(--color-borde); }
+.btn-secundario:hover { color: var(--color-texto); border-color: var(--color-acento); }
+.EstadoTabla { padding: 1.5rem; color: var(--color-secundario); text-align: center; }
+.NotaTabla { margin: .8rem 0 0; color: var(--color-secundario); font-size: .78rem; line-height: 1.5; }
+.NotaTabla i { color: var(--color-acento); }
+.EstadoEtiqueta {
+    display: inline-block; padding: .35rem .65rem; color: #75d69a;
+    background: rgba(22,163,74,.12); border: 1px solid rgba(22,163,74,.25);
+    border-radius: 2rem; font-size: .78rem;
+}
+.Mensaje { display: none; margin: .5rem 0 1rem; padding: .8rem 1rem; border-radius: .55rem; }
+.Mensaje.visible { display: block; }
+.Mensaje.exito { color: #9be0b1; background: rgba(22,163,74,.12); border: 1px solid rgba(22,163,74,.3); }
+.Mensaje.error { color: #ff9aaa; background: rgba(220,38,38,.12); border: 1px solid rgba(220,38,38,.3); }
+@media (max-width: 1050px) {
+    .Lateral { width: 200px; min-width: 200px; flex-basis: 200px; }
+    .ResumenEntregas { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 700px) {
+    body { flex-direction: column; }
+    .Lateral { width: 100%; min-width: 0; min-height: auto; flex-basis: auto; }
+    .ResumenEntregas { grid-template-columns: 1fr; }
+    .PaginaEntregas { padding: 1rem; }
+    .BarraSuperior { padding: 1rem; }
+    .PanelEncabezado { align-items: flex-start; flex-direction: column; }
+}
