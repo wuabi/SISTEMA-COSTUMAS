@@ -1,0 +1,484 @@
+
+/* ESTILO GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --fondo: #0e1116;
+    --panel: #1f2326;
+    --panel-hover: #292d31;
+    --borde: #383c3f;
+    --texto: #f2f2f2;
+    --texto-secundario: #92979b;
+    --borgona: #9b0b43;
+    --borgona-claro: #e83e79;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto);
+    display: flex;
+    min-height: 100vh;
+}
+
+/* MENÚ LATERAL */
+.Lateral {
+    background-color: var(--panel);
+    color: var(--texto-secundario);
+    width: 235px;
+    min-width: 235px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 1.2rem 1rem;
+    border-right: 1px solid var(--borde);
+}
+
+.LogoMenu {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.LogoMenu h2 {
+    color: white;
+    font-size: 1.4rem;
+}
+
+.LogoMenu p {
+    color: var(--texto-secundario);
+    font-size: 0.8rem;
+    margin-top: 0.4rem;
+}
+
+.EtiquetaMenu {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    margin: 0.5rem 0;
+}
+
+.Lateral button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.6rem;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.Lateral button:hover {
+    background-color: var(--panel-hover);
+    color: white;
+}
+
+.Lateral button.activo,
+.Lateral button.Activo {
+    background: linear-gradient(
+        100deg,
+        rgba(155, 11, 67, 0.35),
+        rgba(155, 11, 67, 0.10)
+    );
+    color: #ff6b9f;
+    border-color: rgba(232, 62, 121, 0.25);
+}
+
+/* CONTENIDO PRINCIPAL */
+.Contenido {
+    flex: 1;
+    min-width: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.Contenido nav {
+    min-height: 65px;
+    padding: 1.2rem 1.8rem;
+    background-color: var(--panel);
+    border-bottom: 1px solid var(--borde);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+}
+
+.Usuario {
+    color: white;
+}
+
+/* ÁREA DE LA PÁGINA */
+.Pagina {
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ENCABEZADO */
+.Encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.Encabezado h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.Encabezado p {
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* BOTONES PRINCIPALES */
+.btn-principal {
+    padding: 0.9rem 1.2rem;
+    background: linear-gradient(135deg, #9b0b43, #bd1458);
+    color: white;
+    border: 1px solid #b51a53;
+    border-radius: 0.7rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-principal:hover {
+    background: linear-gradient(135deg, #b51053, #dc286d);
+    transform: translateY(-1px);
+}
+
+/* TARJETAS DE RESUMEN */
+.Resumen {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.Tarjeta {
+    min-width: 0;
+    background: linear-gradient(145deg, #22272b, #1b1f22);
+    border: 1px solid var(--borde);
+    border-radius: 0.9rem;
+    padding: 1.3rem;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.Tarjeta:hover {
+    transform: translateY(-3px);
+    border-color: rgba(232, 62, 121, 0.55);
+}
+
+.Tarjeta p {
+    color: var(--texto-secundario);
+    font-size: 0.8rem;
+    margin-bottom: 0.7rem;
+}
+
+.Tarjeta h2 {
+    color: white;
+    font-size: 1.8rem;
+}
+
+/* PANELES */
+.Panel {
+    min-width: 0;
+    background-color: var(--panel);
+    border: 1px solid var(--borde);
+    border-radius: 0.9rem;
+    overflow: hidden;
+}
+
+.PanelTitulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.3rem;
+    border-bottom: 1px solid var(--borde);
+}
+
+.PanelTitulo h2 {
+    font-size: 1rem;
+    color: white;
+    margin-bottom: 0.4rem;
+}
+
+.PanelTitulo p {
+    color: var(--texto-secundario);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+/* BUSCADOR */
+#buscar {
+    width: 260px;
+    max-width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: #15191c;
+    border: 1px solid var(--borde);
+    border-radius: 0.6rem;
+    color: white;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+#buscar:focus {
+    border-color: var(--borgona-claro);
+}
+
+#buscar::placeholder {
+    color: #777f84;
+}
+
+/* TABLA */
+.TablaContenedor {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.TablaContenedor table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.TablaContenedor th {
+    background-color: #191d20;
+    color: #e86b96;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.TablaContenedor th,
+.TablaContenedor td {
+    padding: 1rem 0.9rem;
+    border-bottom: 1px solid #303539;
+}
+
+.TablaContenedor td {
+    color: #d5d8da;
+    font-size: 0.8rem;
+}
+
+.TablaContenedor tbody tr:hover {
+    background-color: var(--panel-hover);
+}
+
+.TablaContenedor tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.Vacio {
+    padding: 2rem !important;
+    text-align: center;
+    color: var(--texto-secundario) !important;
+    line-height: 1.6;
+}
+
+/* SELECTOR DE ESTADO */
+.selector-estado {
+    padding: 0.5rem 0.7rem;
+    background-color: #15191c;
+    border: 1px solid var(--borde);
+    border-radius: 0.5rem;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.selector-estado:focus {
+    border-color: var(--borgona-claro);
+}
+
+/* BOTÓN VER DETALLE */
+.btn-detalle {
+    padding: 0.55rem 0.8rem;
+    background-color: rgba(155, 11, 67, 0.2);
+    border: 1px solid rgba(232, 62, 121, 0.3);
+    border-radius: 0.5rem;
+    color: #ff6b9f;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-detalle:hover {
+    background-color: var(--borgona);
+    color: white;
+}
+
+/* FORMULARIO */
+#formulario {
+    padding-bottom: 1.3rem;
+}
+
+#formPedido {
+    padding: 1.3rem;
+}
+
+.Campos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.Campos label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: #c5c9cc;
+    font-size: 0.8rem;
+}
+
+.Campos input,
+.Campos select {
+    width: 100%;
+    min-width: 0;
+    padding: 0.85rem;
+    background-color: #15191c;
+    border: 1px solid var(--borde);
+    border-radius: 0.55rem;
+    color: white;
+    font-family: inherit;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.Campos input:focus,
+.Campos select:focus {
+    border-color: var(--borgona-claro);
+    box-shadow: 0 0 0 2px rgba(232, 62, 121, 0.1);
+}
+
+.Campos input::placeholder {
+    color: #626a70;
+}
+
+.Campos select option {
+    background-color: var(--panel);
+    color: white;
+}
+
+/* AVISO INFORMATIVO */
+.Aviso {
+    margin-top: 1.2rem;
+    padding: 1rem;
+    background-color: rgba(155, 11, 67, 0.12);
+    border: 1px solid rgba(232, 62, 121, 0.2);
+    border-radius: 0.6rem;
+    color: var(--texto-secundario);
+    font-size: 0.8rem;
+    line-height: 1.6;
+}
+
+/* BOTONES DEL FORMULARIO */
+.AccionesFormulario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    margin-top: 1.3rem;
+}
+
+.btn-secundario {
+    padding: 0.85rem 1.2rem;
+    background-color: transparent;
+    border: 1px solid var(--borde);
+    border-radius: 0.6rem;
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-secundario:hover {
+    background-color: var(--panel-hover);
+    color: white;
+}
+
+/* ADAPTACIÓN A PANTALLAS PEQUEÑAS */
+@media (max-width: 1050px) {
+    .Lateral {
+        width: 200px;
+        min-width: 200px;
+    }
+
+    .Resumen {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        flex-direction: column;
+    }
+
+    .Lateral {
+        width: 100%;
+        min-width: 0;
+        min-height: auto;
+    }
+
+    .Contenido nav {
+        padding: 1rem;
+    }
+
+    .Pagina {
+        padding: 1rem;
+    }
+
+    .Encabezado {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .Encabezado .btn-principal {
+        width: 100%;
+    }
+
+    .Resumen {
+        grid-template-columns: 1fr;
+    }
+
+    .PanelTitulo {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    #buscar {
+        width: 100%;
+    }
+
+    .Campos {
+        grid-template-columns: 1fr;
+    }
+
+    .AccionesFormulario {
+        flex-direction: column;
+    }
+
+    .AccionesFormulario button {
+        width: 100%;
+    }
+}
+
