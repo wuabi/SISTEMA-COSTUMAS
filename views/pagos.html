@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Pagos</title>
+
+    <link rel="stylesheet" href="./pagos.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <main class="ContenidoPagos">
+
+        <!-- ENCABEZADO -->
+        <header class="BarraSuperior">
+            <div>
+                <h1>Gestión de pagos</h1>
+                <p>Administra y consulta los pagos registrados en el sistema.</p>
+            </div>
+
+            <div class="PerfilUsuario">
+                <div class="AvatarUsuario">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div>
+                    <strong>Administrador</strong>
+                    <span>Panel de gestión</span>
+                </div>
+            </div>
+        </header>
+
+
+        <section class="PanelPagos">
+
+            <!-- TÍTULO -->
+            <div class="EncabezadoPanel">
+                <div>
+                    <h2>Pagos</h2>
+                    <p>Control y seguimiento de los movimientos de pago.</p>
+                </div>
+            </div>
+
+
+            <!-- TARJETAS -->
+            <section class="TarjetasPagos">
+
+                <article class="Tarjeta">
+                    <div class="InformacionTarjeta">
+                        <span>Total de pagos</span>
+                        <h3 id="totalPagos">0</h3>
+                        <small>Pagos registrados</small>
+                    </div>
+                    <div class="IconoTarjeta">
+                        <i class="fa-solid fa-receipt"></i>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="InformacionTarjeta">
+                        <span>Total recaudado</span>
+                        <h3 id="totalRecaudado">L. 0.00</h3>
+                        <small>Monto acumulado</small>
+                    </div>
+                    <div class="IconoTarjeta">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="InformacionTarjeta">
+                        <span>Pagos completados</span>
+                        <h3 id="pagosCompletados">0</h3>
+                        <small>Pagos realizados</small>
+                    </div>
+                    <div class="IconoTarjeta">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="InformacionTarjeta">
+                        <span>Pagos pendientes</span>
+                        <h3 id="pagosPendientes">0</h3>
+                        <small>Pagos por completar</small>
+                    </div>
+                    <div class="IconoTarjeta">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ACCIONES -->
+            <section class="BarraAcciones">
+
+                <div class="Buscador">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input
+                        type="search"
+                        id="buscarPago"
+                        placeholder="Buscar pago..."
+                    >
+                </div>
+
+                <button type="button" class="BotonNuevo" id="btnNuevoPago">
+                    <i class="fa-solid fa-plus"></i>
+                    Nuevo pago
+                </button>
+
+            </section>
+
+
+            <!-- TABLA Y FORMULARIO -->
+            <section class="ZonaTrabajo">
+
+                <!-- TABLA -->
+                <div class="ContenedorTabla">
+
+                    <div class="TituloTabla">
+                        <div>
+                            <h3>Historial de pagos</h3>
+                            <p>Listado de los pagos registrados.</p>
+                        </div>
+                    </div>
+
+                    <div class="TablaDesplazable">
+                        <table class="TablaPagos">
+
+                           <thead>
+                 <tr>
+                          <th>ID PAGO</th>
+                          <th>ID VENTA</th>
+                          <th>FECHA</th>
+                          <th>MONTO</th>
+                          <th>MÉTODO</th>
+                          <th>ESTADO</th>
+                          <th>TOTAL VENTA</th>
+                          <th>TOTAL ABONADO</th>
+                          <th>SALDO PENDIENTE</th>
+                          <th>ACCIONES</th>
+                   </tr>
+                           </thead>
+                           
+                            <tbody id="TablaPagos">
+                                <tr class="FilaVacia">
+                                    <td colspan="7">
+                                        <div class="MensajeVacio">
+                                            <i class="fa-solid fa-receipt"></i>
+                                            <strong>No hay pagos registrados</strong>
+                                            <span>Los pagos aparecerán aquí cuando sean registrados.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <div class="PieTabla">
+                        <span>Pagos registrados en el sistema</span>
+                    </div>
+
+                </div>
+
+
+                <!-- FORMULARIO -->
+                <aside class="FormularioPago" id="FormularioPago" hidden>
+
+                    <div class="TituloFormulario">
+
+                        <div class="IconoFormulario">
+                            <i class="fa-solid fa-money-bill-transfer"></i>
+                        </div>
+
+                        <div>
+                            <h3>Nuevo pago</h3>
+                            <p>Ingresa la información del pago.</p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="CerrarFormulario"
+                            id="btnCerrarPago"
+                            title="Cerrar"
+                        >
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+
+                    </div>
+
+
+                    <form id="formPago">
+
+                        <!-- ID oculto para editar pagos -->
+                        <input type="hidden" id="idPago" name="idPago">
+
+                        <div class="GrupoFormulario">
+                            <label for="id_venta">ID de venta</label>
+                            <input
+                                type="number"
+                                id="id_venta"
+                                name="id_venta"
+                                min="1"
+                                placeholder="Ingrese el ID de venta"
+                                required
+                            >
+                        </div>
+
+                        <div class="GrupoFormulario">
+                            <label for="monto">Monto</label>
+                            <div class="CampoMonto">
+                                <span>L.</span>
+                                <input
+                                    type="number"
+                                    id="monto"
+                                    name="monto"
+                                    min="0.01"
+                                    step="0.01"
+                                    placeholder="0.00"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="GrupoFormulario">
+                            <label for="metodo_pago">Método de pago</label>
+                            <select id="metodo_pago" name="metodo_pago" required>
+                                <option value="" disabled selected>
+                                    Seleccione un método
+                                </option>
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Tarjeta">Tarjeta</option>
+                                <option value="Transferencia">Transferencia</option>
+                            </select>
+                        </div>
+
+                        <div class="GrupoFormulario">
+                            <label for="estado_pago">Estado del pago</label>
+                            <select id="estado_pago" name="estado_pago" required>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Pagado">Pagado</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </div>
+
+
+                        <div class="NotaFormulario">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Verifica que la información ingresada sea correcta.</span>
+                        </div>
+
+
+                        <div class="BotonesFormulario">
+
+                            <button type="submit" class="BotonGuardar">
+                                <i class="fa-solid fa-floppy-disk"></i>
+                                Registrar pago
+                            </button>
+
+                            <button
+                                type="button"
+                                class="BotonCancelar"
+                                id="btnCancelarPago"
+                            >
+                                <i class="fa-solid fa-xmark"></i>
+                                Cancelar
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </aside>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <!-- Controlador de Pagos -->
+    <script src="../controllers/pagosController.js"></script>
+
+</body>
+</html>
+
+
