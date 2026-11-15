@@ -1,43 +1,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Gestión de entregas | Costumas</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="../styles/gestionMedidas.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de entregas | Costumas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/navigation.css">
+    <link rel="stylesheet" href="../styles/gestionEntregas.css">
 </head>
 <body>
-	<aside class="Lateral">
-		<img src="../assets/logo-costumas4.png" alt="Logo Costumas" class="LogoMenu">
-		<button type="button" onclick="location.href='dashboard.html'"><i class="bi bi-house"></i> Panel principal</button>
-		<button type="button" onclick="location.href='gestionClientes.html'"><i class="bi bi-people"></i> Gestión de clientes</button>
-		<button type="button" onclick="location.href='gestionMedidas.html'"><i class="bi bi-pencil-square"></i> Gestión de medidas</button>
-		<button type="button" onclick="location.href='gestionEncargos.html'"><i class="bi bi-clipboard2-plus"></i> Encargos</button>
-		<button class="Activo" type="button" aria-current="page" onclick="location.href='gestionEntregas.html'"><i class="bi bi-clipboard2-check"></i> Entregas</button>
-		<button type="button" onclick="location.href='gestionPagos.html'"><i class="bi bi-cash-coin"></i> Pagos</button>
-		<button type="button" onclick="location.href='gestionReportes.html'"><i class="bi bi-graph-up-arrow"></i> Reportes</button>
-	</aside>
+    <aside class="Lateral">
+        <img src="../assets/logo-costumas4.png" alt="Logo Costumas" class="LogoMenu">
+        <button type="button" onclick="location.href='dashboard.html'"><i class="bi bi-house-door"></i> Panel principal</button>
+        <button type="button" onclick="location.href='gestionClientes.html'"><i class="bi bi-people"></i> Gestión de clientes</button>
+        <button type="button" onclick="location.href='gestionMedidas.html'"><i class="bi bi-pencil-square"></i> Gestión de medidas</button>
+        <button type="button" onclick="location.href='gestionEncargos.html'"><i class="bi bi-clipboard2-plus"></i> Encargos</button>
+        <button class="Activo" type="button" aria-current="page"><i class="bi bi-clipboard2-check"></i> Entregas</button>
+        <button type="button" onclick="location.href='gestionPagos.html'"><i class="bi bi-cash-coin"></i> Pagos</button>
+        <button type="button" onclick="location.href='gestionReportes.html'"><i class="bi bi-graph-up-arrow"></i> Reportes</button>
+    </aside>
 
-	<main class="ContenidoMedidas">
-		<nav class="BarraSuperior" aria-label="Encabezado">
-			<div>
-				<h1>Gestión de entregas</h1>
-				<p>Consulta y organiza las entregas de tus encargos</p>
-			</div>
-			<div class="IconosSuperiores" aria-label="Accesos de usuario">
-				<button type="button" aria-label="Configuración"><i class="bi bi-gear"></i></button>
-				<button type="button" aria-label="Notificaciones"><i class="bi bi-bell"></i></button>
-				<button type="button" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
-			</div>
-		</nav>
+    <main class="ContenidoEntregas">
+        <nav class="BarraSuperior">
+            <div>
+                <h1>Gestión de entregas</h1>
+                <p>Consulta pedidos terminados y registra cuándo se entregan.</p>
+            </div>
+            <div class="IconosSuperiores" aria-label="Accesos de usuario">
+                <button type="button" aria-label="Configuración"><i class="bi bi-gear"></i></button>
+                <button type="button" aria-label="Notificaciones"><i class="bi bi-bell"></i></button>
+                <button type="button" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+            </div>
+        </nav>
 
-		<section class="PanelMedidas" aria-label="Estado del módulo">
-			<div class="NotaUnidad" role="status">
-				<i class="bi bi-tools" aria-hidden="true"></i>
-				<p><strong>Módulo en desarrollo</strong><br>La gestión de entregas estará disponible próximamente.</p>
-			</div>
-		</section>
-	</main>
+        <section class="PaginaEntregas">
+            <section class="ResumenEntregas">
+                <article class="TarjetaResumen">
+                    <span class="IconoResumen"><i class="bi bi-box-seam"></i></span>
+                    <div><p>Por entregar</p><h2 id="totalPendientes">0</h2></div>
+                </article>
+                <article class="TarjetaResumen">
+                    <span class="IconoResumen entregada"><i class="bi bi-check2-circle"></i></span>
+                    <div><p>Entregadas</p><h2 id="totalEntregadas">0</h2></div>
+                </article>
+                <article class="TarjetaResumen">
+                    <span class="IconoResumen"><i class="bi bi-clipboard-data"></i></span>
+                    <div><p>Total consultado</p><h2 id="totalGestionadas">0</h2></div>
+                </article>
+            </section>
+
+            <section class="PanelEntregas">
+                <div class="PanelEncabezado">
+                    <div><h2>Pedidos pendientes de entrega</h2><p>Se muestran los pedidos cuyo estado es «Terminado».</p></div>
+                    <button type="button" id="btnActualizar" class="btn-secundario"><i class="bi bi-arrow-clockwise"></i> Actualizar</button>
+                </div>
+                <label class="CampoBusqueda">
+                    <i class="bi bi-search"></i>
+                    <input id="buscarEntrega" type="search" placeholder="Buscar por cliente, teléfono o número de pedido...">
+                </label>
+                <div class="TablaContenedor">
+                    <table>
+                        <thead><tr>
+                            <th>Pedido</th><th>Cliente</th><th>Teléfono</th>
+                            <th>Fecha del pedido</th><th>Fecha programada</th>
+                            <th>Total</th><th>Registrar entrega</th>
+                        </tr></thead>
+                        <tbody id="tablaPendientes">
+                            <tr><td colspan="7" class="EstadoTabla">Cargando pedidos...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="NotaTabla"><i class="bi bi-info-circle"></i> La fecha programada y la fecha real se guardan localmente en este equipo, porque la base de datos actual no tiene columnas para esas fechas.</p>
+            </section>
+
+            <section class="PanelEntregas">
+                <div class="PanelEncabezado">
+                    <div><h2>Historial de entregas</h2><p>Pedidos que ya tienen estado «Entregado».</p></div>
+                    <span class="EtiquetaSeccion"><i class="bi bi-check-circle"></i> Completadas</span>
+                </div>
+                <div class="TablaContenedor">
+                    <table>
+                        <thead><tr>
+                            <th>Pedido</th><th>Cliente</th><th>Teléfono</th>
+                            <th>Fecha del pedido</th><th>Fecha de entrega</th>
+                            <th>Total</th><th>Estado</th>
+                        </tr></thead>
+                        <tbody id="tablaHistorial">
+                            <tr><td colspan="7" class="EstadoTabla">Cargando historial...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <div id="mensaje" class="Mensaje" role="status" aria-live="polite"></div>
+        </section>
+    </main>
+    <script src="../controllers/gestionEntregasController.js"></script>
 </body>
 </html>
