@@ -1,8 +1,6 @@
-// controllers/reportes.js
+
 const { obtenerReporte } = require("../models/reportes");
 
-// Chart.js: se usa el de la etiqueta <script> (igual que el panel principal).
-// Si no está disponible, se intenta con el paquete instalado: npm install chart.js
 let Chart = window.Chart;
 if (!Chart) {
 	try {
@@ -169,7 +167,7 @@ async function cargar() {
 }
 
 selectorReporte.addEventListener("change", () => {
-	// El inventario no depende del periodo
+	
 	selectorPeriodo.classList.toggle("Deshabilitado", selectorReporte.value === "inventario");
 	cargar();
 });
