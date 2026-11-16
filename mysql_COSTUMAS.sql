@@ -112,11 +112,16 @@ CREATE TABLE Movimientos_Inventario (
 
 -- 8. PEDIDOS DE CLIENTES
 
+-- En bases existentes, agregar estas columnas con:
+-- ALTER TABLE Pedidos_C ADD COLUMN fecha_programada DATE NULL, ADD COLUMN fecha_entrega DATE NULL;
 CREATE TABLE Pedidos_C (
     id_pedido_c INT AUTO_INCREMENT PRIMARY KEY,
     id_cliente INT NOT NULL,
     fecha_pedido DATETIME
         NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    fecha_programada DATE NULL,
+    fecha_entrega DATE NULL,
 
     estado ENUM(
         'Pendiente',
@@ -292,7 +297,7 @@ CREATE TABLE medidas_camisa (
     talla VARCHAR(4),
     observaciones TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_cliente_camisa FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
+    CONSTRAINT fk_cliente_camisa FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente) ON DELETE CASCADE
 );
 
 -- 16. MEDIDAS PANTALÓN
@@ -309,7 +314,7 @@ CREATE TABLE medidas_pantalon (
     talla VARCHAR(4),
     observaciones TEXT,
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_cliente_pantalon FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
+    CONSTRAINT fk_cliente_pantalon FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente) ON DELETE CASCADE
 );
 
 -- DATOS DE ACCESO DE PRUEBA
@@ -319,7 +324,7 @@ VALUES ('Administrador', 'Acceso de administrador al sistema')
 ON DUPLICATE KEY UPDATE descripcion = 'Acceso de administrador al sistema';
 
 INSERT INTO Usuarios (nombre, id_rol, correo, estado, contrasena)
-SELECT 'Administrador', R.id_rol, 'admin@costumas.com', 'Activo', 'CostumasDemo2026!'
+SELECT 'Administrador', R.id_rol, 'admin@costumas.com', 'Activo', '7b57990d3f23c6dee1c6c119fedf84a313971edfbc9ab7624440d6f42e2d6d78'
 FROM Roles R
 WHERE R.nombre_rol = 'Administrador'
     AND NOT EXISTS (
@@ -356,7 +361,7 @@ VALUES
     '98765432',
     'gerente@costumas.com',
     'Activo',
-    'Gerente2026!'
+    'bfc703cf6551ccc8f506a64522af86ce8c691c0cec46814663ca9f7f41f14443'
 ),
 (
     'Carlos Alberto Reyes',
@@ -364,7 +369,7 @@ VALUES
     '99887766',
     'empleado@costumas.com',
     'Activo',
-    'Empleado2026!'
+    '09eda9d1f231d7170e9db0b1b9f84435fd88d5ac9ac5cfc9c864993d56fd5d56'
 );
 
 
