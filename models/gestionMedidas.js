@@ -1,5 +1,5 @@
 const conexion = require("../database");
-
+// --- se arreglo problemas en el repositorio ---
 function obtenerClientes(callback) {
 	const sql = `
 		SELECT id_cliente, nombre
@@ -9,7 +9,7 @@ function obtenerClientes(callback) {
 	conexion.query(sql, callback);
 }
 
-// --- MEDIDAS DE CAMISAS ---
+
 function obtenerMedidasCamisa(callback) {
 	const sql = `
 		SELECT m.*, c.nombre AS nombre_cliente
