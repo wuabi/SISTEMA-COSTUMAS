@@ -1,7 +1,6 @@
+@import url("./navigation.css");
 
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -10,270 +9,269 @@
     --panel: #1f2326;
     --panel-hover: #292d31;
     --borde: #383c3f;
-
     --texto: #f2f2f2;
     --texto-secundario: #92979b;
-
     --borgona: #9b0b43;
     --borgona-claro: #e83e79;
 }
 
 body {
+    display: flex;
     min-height: 100vh;
-    background: var(--fondo);
+    margin: 0;
     color: var(--texto);
-    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--fondo);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .ContenidoPagos {
-    width: 100%;
+    display: flex;
+    min-width: 0;
     min-height: 100vh;
-    padding: 30px 35px;
+    flex: 1;
+    flex-direction: column;
 }
 
-
 .BarraSuperior {
+    min-height: 92px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 32px;
+    gap: 1rem;
+    padding: 1.2rem 1.8rem;
+    background: var(--panel);
+    border-bottom: 1px solid var(--borde);
 }
 
 .BarraSuperior h1 {
-    font-size: 25px;
-    margin-bottom: 6px;
+    margin: 0 0 .4rem;
+    color: var(--texto);
+    font-size: 1.45rem;
 }
 
 .BarraSuperior p {
+    margin: 0;
     color: var(--texto-secundario);
-    font-size: 13px;
+    font-size: .85rem;
 }
 
-.PerfilUsuario {
+.IconosSuperiores {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1rem;
 }
 
-.AvatarUsuario {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    background: rgba(232, 62, 121, 0.15);
+.IconosSuperiores button {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    color: var(--texto-secundario);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: .5rem;
+    cursor: pointer;
+}
+
+.IconosSuperiores button:hover,
+.IconosSuperiores button:focus-visible {
     color: var(--borgona-claro);
+    border-color: var(--borde);
 }
 
-.PerfilUsuario strong,
-.PerfilUsuario span {
-    display: block;
+.IconosSuperiores i {
+    font-size: 1.2rem;
 }
-
-.PerfilUsuario strong {
-    font-size: 12px;
-}
-
-.PerfilUsuario span {
-    margin-top: 4px;
-    color: var(--texto-secundario);
-    font-size: 10px;
-}
-
 
 .PanelPagos {
-    width: 100%;
+    flex: 1;
+    padding: 1.6rem;
 }
 
 .EncabezadoPanel {
-    margin-bottom: 22px;
+    margin-bottom: 1rem;
 }
 
 .EncabezadoPanel h2 {
-    font-size: 20px;
-    margin-bottom: 5px;
+    margin: 0 0 .35rem;
+    color: #dfe7eb;
+    font-size: 1.08rem;
 }
 
 .EncabezadoPanel p {
+    margin: 0;
     color: var(--texto-secundario);
-    font-size: 12px;
+    font-size: .85rem;
 }
-
 
 .TarjetasPagos {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px;
-    margin-bottom: 25px;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .Tarjeta {
-    min-height: 125px;
-    padding: 20px;
-
+    position: relative;
+    min-width: 0;
+    min-height: 112px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-
-    background: var(--panel);
+    gap: 1rem;
+    padding: 1.2rem;
+    background: linear-gradient(145deg, #22272b, #1b1f22);
     border: 1px solid var(--borde);
-    border-radius: 11px;
-
-    transition: 0.2s;
+    border-top: 2px solid var(--borgona);
+    border-radius: .9rem;
+    transition: transform .2s, border-color .2s;
 }
 
 .Tarjeta:hover {
-    background: var(--panel-hover);
-    border-color: #654050;
     transform: translateY(-3px);
+    border-color: rgba(232, 62, 121, .55);
+}
+
+.InformacionTarjeta {
+    min-width: 0;
 }
 
 .InformacionTarjeta span {
     color: var(--texto-secundario);
-    font-size: 12px;
+    font-size: .8rem;
 }
 
 .InformacionTarjeta h3 {
-    margin: 9px 0 5px;
-    font-size: 23px;
+    margin: .5rem 0 .3rem;
+    color: var(--texto);
+    font-size: 1.5rem;
 }
 
 .InformacionTarjeta small {
-    color: var(--texto-secundario);
-    font-size: 10px;
+    color: #737b80;
+    font-size: .7rem;
 }
 
-
-/* TODOS LOS ICONOS EN ROSA */
 .IconoTarjeta,
-.IconoFormulario,
-.AvatarUsuario {
+.IconoFormulario {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    display: grid;
+    place-items: center;
     color: var(--borgona-claro);
+    background: rgba(155, 11, 67, .2);
+    border: 1px solid rgba(232, 62, 121, .2);
+    border-radius: .7rem;
+    font-size: 1.35rem;
 }
-
-.IconoTarjeta {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 10px;
-    background: rgba(232, 62, 121, 0.13);
-    font-size: 18px;
-}
-
 
 .BarraAcciones {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 1rem;
+    margin-bottom: 1.3rem;
 }
 
 .Buscador {
-    width: 100%;
-    max-width: 350px;
-    height: 42px;
-
+    min-width: 0;
+    flex: 1;
     display: flex;
     align-items: center;
-    gap: 10px;
-
-    padding: 0 14px;
+    gap: .8rem;
+    padding: .85rem 1rem;
+    color: var(--borgona-claro);
     background: var(--panel);
     border: 1px solid var(--borde);
-    border-radius: 8px;
-
-    color: var(--borgona-claro);
+    border-radius: .7rem;
+    transition: border-color .2s;
 }
 
 .Buscador:focus-within {
     border-color: var(--borgona-claro);
 }
 
+.Buscador i {
+    font-size: 1.1rem;
+}
+
 .Buscador input {
     width: 100%;
-    border: none;
-    outline: none;
-    background: transparent;
+    min-width: 0;
     color: var(--texto);
-    font-size: 12px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font: inherit;
+    font-size: .85rem;
 }
 
 .Buscador input::placeholder {
-    color: var(--texto-secundario);
+    color: #777f84;
 }
 
 .BotonNuevo {
-    min-height: 42px;
-    padding: 0 18px;
-
+    min-width: max-content;
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 9px;
-
-    border: none;
-    border-radius: 8px;
-    background: var(--borgona);
-    color: white;
-
-    font-size: 12px;
-    font-weight: 600;
+    gap: .6rem;
+    padding: .75rem 1.2rem;
+    color: #fff;
+    background: linear-gradient(135deg, #9b0b43, #bd1458);
+    border: 1px solid #b51a53;
+    border-radius: .7rem;
+    font-size: .85rem;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-.BotonNuevo i {
-    color: white;
+    transition: .2s;
 }
 
 .BotonNuevo:hover {
-    background: var(--borgona-claro);
-    box-shadow: 0 4px 14px rgba(232, 62, 121, 0.2);
+    background: linear-gradient(135deg, #b51053, #dc286d);
+    box-shadow: 0 5px 18px rgba(155, 11, 67, .25);
+    transform: translateY(-1px);
 }
-
 
 .ZonaTrabajo {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 310px;
     align-items: start;
-    gap: 20px;
+    gap: 1.2rem;
 }
 
 .ZonaTrabajo:has(.FormularioPago[hidden]) {
     grid-template-columns: minmax(0, 1fr);
 }
 
-
-.ContenedorTabla {
+.ContenedorTabla,
+.FormularioPago {
     min-width: 0;
     overflow: hidden;
     background: var(--panel);
     border: 1px solid var(--borde);
-    border-radius: 11px;
+    border-radius: .9rem;
 }
 
 .TituloTabla {
-    padding: 20px;
+    padding: 1.3rem;
     border-bottom: 1px solid var(--borde);
 }
 
-.TituloTabla h3 {
-    margin-bottom: 5px;
-    font-size: 15px;
+.TituloTabla h3,
+.TituloFormulario h3 {
+    margin: 0 0 .4rem;
+    color: white;
+    font-size: 1rem;
 }
 
-.TituloTabla p {
+.TituloTabla p,
+.TituloFormulario p {
+    margin: 0;
     color: var(--texto-secundario);
-    font-size: 11px;
+    font-size: .78rem;
 }
 
 .TablaDesplazable {
@@ -284,77 +282,318 @@ body {
 .TablaPagos {
     width: 100%;
     border-collapse: collapse;
+    text-align: left;
     white-space: nowrap;
 }
 
 .TablaPagos thead {
-    background: #191c20;
+    background: #191d20;
+}
+
+.TablaPagos th,
+.TablaPagos td {
+    padding: 1rem .8rem;
+    border-bottom: 1px solid #303539;
 }
 
 .TablaPagos th {
-    padding: 15px 13px;
-    color: var(--texto-secundario);
-    font-size: 10px;
-    text-align: left;
+    color: #e86b96;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .02rem;
 }
 
 .TablaPagos td {
-    padding: 14px 13px;
-    border-top: 1px solid var(--borde);
-    font-size: 12px;
+    color: #d5d8da;
+    font-size: .78rem;
+}
+
+.TablaPagos tbody tr {
+    transition: background-color .2s;
+}
+
+.TablaPagos tbody tr:hover {
+    background: var(--panel-hover);
+}
+
+.TablaPagos tbody tr:last-child td {
+    border-bottom: 0;
 }
 
 .FilaVacia td {
     padding: 0;
-    border: none;
 }
 
 .MensajeVacio {
     min-height: 220px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    gap: 10px;
-    text-align: center;
+    justify-content: center;
+    gap: .65rem;
     color: var(--texto-secundario);
+    text-align: center;
 }
 
 .MensajeVacio i {
-    margin-bottom: 5px;
+    margin-bottom: .3rem;
     color: var(--borgona-claro);
-    font-size: 34px;
+    font-size: 2rem;
 }
 
 .MensajeVacio strong {
     color: var(--texto);
-    font-size: 13px;
+    font-size: .85rem;
 }
 
 .MensajeVacio span {
-    font-size: 11px;
+    font-size: .75rem;
 }
 
 .PieTabla {
-    padding: 14px 18px;
-    border-top: 1px solid var(--borde);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: .7rem;
+    padding: 1rem 1.2rem;
     color: var(--texto-secundario);
-    font-size: 11px;
+    border-top: 1px solid var(--borde);
+    font-size: .72rem;
 }
 
+.EstadoPago {
+    display: inline-block;
+    padding: .35rem .65rem;
+    border: 1px solid transparent;
+    border-radius: 2rem;
+    font-size: .75rem;
+}
 
-/* FORMULARIO */
-.FormularioPago {
-    min-width: 0;
-    padding: 20px;
-    background: var(--panel);
+.EstadoPagado {
+    color: #75d69a;
+    background: rgba(22, 163, 74, .12);
+    border-color: rgba(22, 163, 74, .25);
+}
+
+.EstadoPendiente {
+    color: #f2c46d;
+    background: rgba(232, 160, 62, .12);
+    border-color: rgba(232, 160, 62, .25);
+}
+
+.EstadoCancelado {
+    color: #ff9aaa;
+    background: rgba(220, 38, 38, .12);
+    border-color: rgba(220, 38, 38, .25);
+}
+
+.SaldoLiquidado {
+    color: #75d69a;
+    font-weight: 700;
+}
+
+.SaldoPendiente {
+    color: #f2c46d;
+    font-weight: 700;
+}
+
+.Acciones {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+}
+
+.Acciones button {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: var(--texto-secundario);
+    background: #252a2e;
     border: 1px solid var(--borde);
-    border-radius: 11px;
-    animation: aparecer 0.25s ease;
+    border-radius: .45rem;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.Acciones button:hover {
+    color: white;
+    background: var(--borgona);
+    border-color: var(--borgona);
+}
+
+.FormularioPago {
+    padding: 1.2rem;
+    animation: aparecer .25s ease;
 }
 
 .FormularioPago[hidden] {
     display: none !important;
+}
+
+.TituloFormulario {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--borde);
+}
+
+.IconoFormulario {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+}
+
+.CerrarFormulario {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    display: grid;
+    place-items: center;
+    margin-left: auto;
+    color: var(--borgona-claro);
+    background: transparent;
+    border: 1px solid var(--borde);
+    border-radius: .45rem;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.CerrarFormulario:hover {
+    color: white;
+    background: var(--borgona);
+    border-color: var(--borgona);
+}
+
+.GrupoFormulario {
+    margin-bottom: 1rem;
+}
+
+.GrupoFormulario label {
+    display: block;
+    margin-bottom: .5rem;
+    color: #c5c9cc;
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.GrupoFormulario input,
+.GrupoFormulario select {
+    width: 100%;
+    height: 42px;
+    padding: 0 .8rem;
+    color: var(--texto);
+    background: #15191c;
+    border: 1px solid var(--borde);
+    border-radius: .55rem;
+    outline: 0;
+    font: inherit;
+    font-size: .82rem;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.GrupoFormulario input:focus,
+.GrupoFormulario select:focus {
+    border-color: var(--borgona-claro);
+    box-shadow: 0 0 0 2px rgba(232, 62, 121, .1);
+}
+
+.GrupoFormulario input::placeholder {
+    color: #626a70;
+}
+
+.GrupoFormulario select {
+    cursor: pointer;
+}
+
+.GrupoFormulario select option {
+    color: var(--texto);
+    background: var(--panel);
+}
+
+.CampoMonto {
+    position: relative;
+}
+
+.CampoMonto span {
+    position: absolute;
+    top: 50%;
+    left: .8rem;
+    color: var(--borgona-claro);
+    font-size: .82rem;
+    pointer-events: none;
+    transform: translateY(-50%);
+}
+
+.CampoMonto input {
+    padding-left: 2.1rem;
+}
+
+.NotaFormulario {
+    display: flex;
+    align-items: flex-start;
+    gap: .6rem;
+    margin: 1.2rem 0;
+    padding: .8rem;
+    color: var(--texto-secundario);
+    background: rgba(232, 62, 121, .08);
+    border: 1px solid rgba(232, 62, 121, .2);
+    border-radius: .55rem;
+    font-size: .75rem;
+    line-height: 1.5;
+}
+
+.NotaFormulario i {
+    color: var(--borgona-claro);
+}
+
+.BotonesFormulario {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    margin-top: 1.2rem;
+}
+
+.BotonGuardar,
+.BotonCancelar {
+    width: 100%;
+    min-height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    border-radius: .55rem;
+    font-size: .82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.BotonGuardar {
+    color: white;
+    background: var(--borgona);
+    border: 1px solid var(--borgona);
+}
+
+.BotonGuardar:hover {
+    background: #bd1458;
+}
+
+.BotonCancelar {
+    color: var(--texto-secundario);
+    background: transparent;
+    border: 1px solid var(--borde);
+}
+
+.BotonCancelar:hover {
+    color: white;
+    background: var(--panel-hover);
+    border-color: var(--borgona-claro);
 }
 
 @keyframes aparecer {
@@ -369,252 +608,50 @@ body {
     }
 }
 
-.TituloFormulario {
-    display: flex;
-    align-items: center;
-    gap: 11px;
-    margin-bottom: 23px;
-    padding-bottom: 17px;
-    border-bottom: 1px solid var(--borde);
-}
-
-.IconoFormulario {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 10px;
-    background: rgba(232, 62, 121, 0.13);
-    font-size: 17px;
-}
-
-.TituloFormulario h3 {
-    font-size: 14px;
-    margin-bottom: 4px;
-}
-
-.TituloFormulario p {
-    color: var(--texto-secundario);
-    font-size: 10px;
-}
-
-.CerrarFormulario {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    margin-left: auto;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: transparent;
-    border: 1px solid var(--borde);
-    border-radius: 7px;
-
-    color: var(--borgona-claro);
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.CerrarFormulario:hover {
-    background: var(--borgona);
-    border-color: var(--borgona);
-    color: white;
-}
-
-
-/* CAMPOS */
-.GrupoFormulario {
-    margin-bottom: 17px;
-}
-
-.GrupoFormulario label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 11px;
-    font-weight: 600;
-}
-
-.GrupoFormulario input,
-.GrupoFormulario select {
-    width: 100%;
-    height: 41px;
-    padding: 0 12px;
-
-    outline: none;
-    border: 1px solid var(--borde);
-    border-radius: 7px;
-
-    background: #171a1e;
-    color: var(--texto);
-
-    font-family: inherit;
-    font-size: 11px;
-    transition: 0.2s;
-}
-
-.GrupoFormulario input:focus,
-.GrupoFormulario select:focus {
-    border-color: var(--borgona-claro);
-}
-
-.GrupoFormulario input::placeholder {
-    color: #72777b;
-}
-
-.GrupoFormulario select {
-    cursor: pointer;
-}
-
-.GrupoFormulario select option {
-    background: var(--panel);
-    color: var(--texto);
-}
-
-.CampoMonto {
-    position: relative;
-}
-
-.CampoMonto span {
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    transform: translateY(-50%);
-    color: var(--borgona-claro);
-    font-size: 11px;
-    pointer-events: none;
-}
-
-.CampoMonto input {
-    padding-left: 33px;
-}
-
-
-/* NOTA */
-.NotaFormulario {
-    display: flex;
-    align-items: flex-start;
-    gap: 9px;
-    margin: 20px 0;
-    padding: 12px;
-
-    background: rgba(232, 62, 121, 0.08);
-    border: 1px solid rgba(232, 62, 121, 0.2);
-    border-radius: 7px;
-
-    color: var(--texto-secundario);
-    font-size: 10px;
-    line-height: 1.5;
-}
-
-.NotaFormulario i {
-    color: var(--borgona-claro);
-}
-
-
-/* BOTONES DEL FORMULARIO */
-.BotonesFormulario {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 22px;
-}
-
-.BotonGuardar,
-.BotonCancelar {
-    width: 100%;
-    min-height: 41px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-
-    border-radius: 7px;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.BotonGuardar {
-    border: none;
-    background: var(--borgona);
-    color: white;
-}
-
-.BotonGuardar:hover {
-    background: var(--borgona-claro);
-}
-
-.BotonCancelar {
-    border: 1px solid var(--borde);
-    background: transparent;
-    color: var(--texto-secundario);
-}
-
-.BotonCancelar:hover {
-    background: var(--panel-hover);
-    border-color: var(--borgona-claro);
-    color: var(--borgona-claro);
-}
-
-
-/* RESPONSIVE */
-@media (max-width: 1200px) {
+@media (max-width: 1050px) {
     .TarjetasPagos {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
     .ZonaTrabajo,
     .ZonaTrabajo:has(.FormularioPago[hidden]) {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 
 @media (max-width: 700px) {
+    body {
+        flex-direction: column;
+    }
+
     .ContenidoPagos {
-        padding: 20px 15px;
+        min-height: auto;
     }
 
     .BarraSuperior {
-        align-items: flex-start;
+        padding: 1rem;
     }
 
     .BarraSuperior h1 {
-        font-size: 21px;
+        font-size: 1.25rem;
     }
 
-    .PerfilUsuario {
-        display: none;
+    .PanelPagos {
+        padding: 1rem;
     }
 
     .TarjetasPagos {
         grid-template-columns: 1fr;
-        gap: 12px;
     }
 
     .BarraAcciones {
-        flex-direction: column;
         align-items: stretch;
-    }
-
-    .Buscador {
-        max-width: none;
+        flex-direction: column;
     }
 
     .BotonNuevo {
         width: 100%;
-    }
-
-    .TablaPagos {
-        min-width: 750px;
     }
 }
