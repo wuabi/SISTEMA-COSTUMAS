@@ -27,7 +27,6 @@
 				<p>Medidas y datos de confección de tus clientes</p>
 			</div>
 			<div class="IconosSuperiores" aria-label="Accesos de usuario">
-				<!-- <button type="button" aria-label="Configuración"><i class="bi bi-gear"></i></button> -->
 				<button type="button" aria-label="Notificaciones"><i class="bi bi-bell"></i></button>
 				<button type="button" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
 			</div>
@@ -37,24 +36,30 @@
 			<div class="ResumenMedidas">
 				<article class="ResumenItem">
 					<span class="IconoResumen"><i class="bi bi-rulers"></i></span>
-					<div><p>Registros de medidas</p><strong>—</strong></div>
+					<div><p>Registros de medidas</p><strong id="totalMedidas">0</strong></div>
 				</article>
 				<article class="ResumenItem">
 					<span class="IconoResumen IconoVerde"><i class="bi bi-person-check"></i></span>
-					<div><p>Clientes con medidas</p><strong>—</strong></div>
+					<div><p>Clientes con medidas</p><strong id="clientesConMedidas">0</strong></div>
 				</article>
 				<article class="NotaUnidad">
 					<i class="bi bi-info-circle"></i>
-					<p>Registra las medidas en centímetros para mantenerlas uniformes.</p>
+					<p>Registra las medidas en pulgadas para mantenerlas uniformes.</p>
 				</article>
 			</div>
 
 			<div class="BarraAcciones">
 				<label class="Buscador" for="buscarMedida">
 					<i class="bi bi-search" aria-hidden="true"></i>
-					<input type="search" id="buscarMedida" placeholder="Buscar por cliente o prenda...">
+					<input type="search" id="buscarMedida" placeholder="Buscar por cliente...">
 				</label>
-				<button class="BotonNuevo" type="button" onclick="document.getElementById('clienteMedida').focus()">
+				<!-- Botón para alternar vista en la tabla -->
+				<button class="BotonNuevo" type="button" id="btnAlternarVista" aria-label="Cambiar entre medidas de camisas y pantalones">
+					<i class="bi bi-arrow-repeat" aria-hidden="true"></i>
+					Ver: <span id="textoVistaActual">Camisas</span>
+				</button>
+				<button class="BotonNuevo" type="button" id="btnNuevaMedida"
+						aria-label="Nueva medida" aria-expanded="false" aria-controls="formularioMedida">
 					<i class="bi bi-plus-lg" aria-hidden="true"></i>
 					Nueva medida
 				</button>
@@ -64,31 +69,23 @@
 				<section class="ContenedorTabla" aria-labelledby="tituloLista">
 					<div class="TituloTabla">
 						<div>
-							<h2 id="tituloLista">Medidas registradas</h2>
-							<p>Historial de medidas por cliente y tipo de prenda</p>
+							<h2 id="tituloLista">Medidas de <span id="tituloVistaTipo">camisas</span></h2>
+							<p>Historial de medidas registradas</p>
 						</div>
-						<i class="bi bi-rulers" aria-hidden="true"></i>
+						<i class="bi bi-journal-text" aria-hidden="true"></i>
 					</div>
 					<div class="TablaDesplazable">
 						<table>
 							<thead>
-								<tr>
-									<th>Cliente</th>
-									<th>Prenda</th>
-									<th>Pecho</th>
-									<th>Cintura</th>
-									<th>Cadera</th>
-									<th>Largo</th>
-									<th>Actualización</th>
-									<th><span class="SoloLectores">Acciones</span></th>
+								<tr id="cabeceraTabla">
+									<!-- Los headers se cargarán dinámicamente según la vista -->
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="listaMedidasUnica">
 								<tr class="FilaVacia">
 									<td colspan="8">
 										<span class="IconoVacio"><i class="bi bi-journal-plus"></i></span>
-										<strong>No hay medidas registradas</strong>
-										<span>Los registros aparecerán en esta lista.</span>
+										<strong>No hay registros</strong>
 									</td>
 								</tr>
 							</tbody>
@@ -100,7 +97,7 @@
 					</div>
 				</section>
 
-				<section class="FormularioMedida" aria-labelledby="tituloFormulario">
+				<section class="FormularioMedida" id="formularioMedida" aria-labelledby="tituloFormulario" hidden>
 					<div class="TituloFormulario">
 						<span class="IconoFormulario"><i class="bi bi-rulers"></i></span>
 						<div>
@@ -109,7 +106,7 @@
 						</div>
 					</div>
 
-					<form>
+					<form id="formMedida">
 						<label for="clienteMedida">Cliente <span aria-hidden="true">*</span></label>
 						<select id="clienteMedida" name="cliente" required>
 							<option value="" selected disabled>Selecciona un cliente</option>
@@ -120,56 +117,27 @@
 							<option value="" selected disabled>Selecciona una prenda</option>
 							<option value="camisa">Camisa</option>
 							<option value="pantalon">Pantalón</option>
-							<option value="vestido">Vestido</option>
-							<option value="falda">Falda</option>
-							<option value="chaqueta">Chaqueta</option>
-							<option value="otra">Otra</option>
 						</select>
 
 						<div class="EncabezadoMedidas">
 							<h3>Medidas corporales</h3>
-							<span>cm</span>
+							<span>pulg</span>
 						</div>
-						<div class="CamposMedidas">
-							<div class="CampoMedida">
-								<label for="medidaPecho">Pecho</label>
-								<div class="EntradaMedida"><input id="medidaPecho" name="pecho" type="number" min="0" step="0.1" placeholder="0.0"><span>cm</span></div>
-							</div>
-							<div class="CampoMedida">
-								<label for="medidaCintura">Cintura</label>
-								<div class="EntradaMedida"><input id="medidaCintura" name="cintura" type="number" min="0" step="0.1" placeholder="0.0"><span>cm</span></div>
-							</div>
-							<div class="CampoMedida">
-								<label for="medidaCadera">Cadera</label>
-								<div class="EntradaMedida"><input id="medidaCadera" name="cadera" type="number" min="0" step="0.1" placeholder="0.0"><span>cm</span></div>
-							</div>
-							<div class="CampoMedida">
-								<label for="medidaHombro">Hombro</label>
-								<div class="EntradaMedida"><input id="medidaHombro" name="hombro" type="number" min="0" step="0.1" placeholder="0.0"><span>cm</span></div>
-							</div>
-							<div class="CampoMedida">
-								<label for="medidaManga">Manga</label>
-								<div class="EntradaMedida"><input id="medidaManga" name="manga" type="number" min="0" step="0.1" placeholder="0.0"><span>cm</span></div>
-							</div>
-							<div class="CampoMedida">
-								<label for="medidaLargo">Largo</label>
-								<div class="EntradaMedida"><input id="medidaLargo" name="largo" type="number" min="0" step="0.1" placeholder="0.0"><span>cm</span></div>
-							</div>
-						</div>
+
+						<div class="CamposMedidas"></div>
 
 						<label for="observaciones">Observaciones</label>
 						<textarea id="observaciones" name="observaciones" rows="3" placeholder="Detalles adicionales sobre el ajuste..."></textarea>
 
 						<div class="BotonesFormulario">
 							<button type="submit" class="BotonGuardar"><i class="bi bi-floppy" aria-hidden="true"></i> Guardar medidas</button>
-							<button type="reset" class="BotonCancelar"><i class="bi bi-arrow-counterclockwise" aria-hidden="true"></i> Limpiar</button>
+							<button type="button" class="BotonCancelar"><i class="bi bi-x-lg" aria-hidden="true"></i> Cancelar</button>
 						</div>
 					</form>
 				</section>
 			</div>
 		</section>
 	</main>
-	<script src="../controllers/notificaciones.js"></script>
-	<script src="../controllers/perfil.js"></script>
+	<script src="../controllers/roles.js"></script>
 </body>
 </html>
