@@ -1,272 +1,216 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos a proveedores</title>
-    <link rel="stylesheet" href="encargosproveedores.css">
+    <title>Pedidos a proveedores | Costumas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/encargosproveedores.css">
 </head>
-<body>
-
+<body data-tipo-pedido="proveedor">
     <aside class="Lateral">
-        <div class="LogoMenu">
-            <h2>GESTIÓN</h2>
-            <p>Panel administrativo</p>
-        </div>
-
-        <p class="EtiquetaMenu">MENÚ PRINCIPAL</p>
-        <button onclick="location.href='pp2.html'">⌂ Panel principal</button>
-        <button onclick="location.href='encargos.html'">▤ Encargos de clientes</button>
-        <button class="activo">▣ Pedidos a proveedores</button>
+        <img src="../assets/logo-costumas4.png" alt="Logo Costumas" class="LogoMenu">
+        <button type="button" onclick="location.href='dashboard.html'">
+            <i class="bi bi-house"></i>
+            Panel principal
+        </button>
+        <button type="button" onclick="location.href='gestionClientes.html'">
+            <i class="bi bi-people"></i>
+            Gestión de clientes
+        </button>
+        <button type="button" onclick="location.href='gestionMedidas.html'">
+            <i class="bi bi-pencil-square"></i>
+            Gestión de medidas
+        </button>
+        <button type="button" onclick="location.href='encargosclientes.html'">
+            <i class="bi bi-clipboard2-plus"></i>
+            Encargos
+        </button>
+        <button class="Activo" type="button" aria-current="page" onclick="location.href='encargosproveedores.html'">
+            <i class="bi bi-truck"></i>
+            Pedidos a proveedores
+        </button>
+        <button type="button" onclick="location.href='gestionEntregas.html'">
+            <i class="bi bi-clipboard2-check"></i>
+            Entregas
+        </button>
+        <button type="button" onclick="location.href='gestionPagos.html'">
+            <i class="bi bi-cash-coin"></i>
+            Pagos
+        </button>
+        <button type="button" onclick="location.href='gestionReportes.html'">
+            <i class="bi bi-graph-up-arrow"></i>
+            Reportes
+        </button>
     </aside>
 
-    <main class="Contenido">
-        <nav>
-            <span>Gestión / Pedidos a proveedores</span>
-            <span class="Usuario">Administrador</span>
+    <main class="ContenidoEncargos">
+        <nav class="BarraSuperior" aria-label="Encabezado">
+            <div>
+                <h1>Compras a proveedores</h1>
+                <p>Controla tus compras, artículos y recepción de insumos</p>
+            </div>
+            <div class="IconosSuperiores" aria-label="Accesos de usuario">
+                <button type="button" aria-label="Notificaciones">
+                    <i class="bi bi-bell" aria-hidden="true"></i>
+                    <span class="ContadorNotificaciones" aria-hidden="true" hidden></span>
+                </button>
+                <button type="button" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+            </div>
         </nav>
 
-        <section class="Pagina">
-            <header class="Encabezado">
-                <div>
-                    <h1>Pedidos a proveedores</h1>
-                    <p>Controla las compras y los pedidos realizados a tus proveedores.</p>
+        <section class="PanelEncargos">
+            <div class="TarjetasResumen">
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta"><i class="bi bi-clipboard2"></i></div>
+                    <div>
+                        <p>Total comprado</p>
+                        <h2 id="total">0</h2>
+                        <small>Compras registradas</small>
+                    </div>
+                </article>
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta"><i class="bi bi-hourglass-split"></i></div>
+                    <div>
+                        <p>Pedidos</p>
+                        <h2 id="pendientes">0</h2>
+                        <small>Por recibir</small>
+                    </div>
+                </article>
+                <article class="Tarjeta">
+                    <div class="IconoTarjeta"><i class="bi bi-check2-circle"></i></div>
+                    <div>
+                        <p>Recibidos</p>
+                        <h2 id="finalizados">0</h2>
+                        <small>Compras completadas</small>
+                    </div>
+                </article>
+            </div>
+
+            <div class="BarraAcciones">
+                <div class="Buscador">
+                    <i class="bi bi-search" aria-hidden="true"></i>
+                    <input id="buscar" type="search" aria-label="Buscar compras a proveedores"
+                        placeholder="Buscar por proveedor o número de compra...">
                 </div>
-                <button class="btn-principal"
-                    onclick="document.getElementById('formulario').scrollIntoView({behavior:'smooth'})">
-                    + Nuevo pedido
+                <button class="BotonNuevo" id="btnNuevoEncargo" type="button"
+                        aria-expanded="false" aria-controls="formulario">
+                    <i class="bi bi-plus-lg"></i>
+                    Nueva compra
                 </button>
-            </header>
+            </div>
 
-            <section class="Resumen">
-                <article class="Tarjeta">
-                    <p>Total de pedidos</p>
-                    <h2 id="total">0</h2>
-                </article>
-                <article class="Tarjeta">
-                    <p>Pendientes</p>
-                    <h2 id="pendientes">0</h2>
-                </article>
-                <article class="Tarjeta">
-                    <p>En proceso</p>
-                    <h2 id="proceso">0</h2>
-                </article>
-                <article class="Tarjeta">
-                    <p>Terminados / entregados</p>
-                    <h2 id="finalizados">0</h2>
-                </article>
-            </section>
-
-            <section class="Panel">
-                <div class="PanelTitulo">
-                    <div>
-                        <h2>Listado de pedidos</h2>
-                        <p>Consulta y actualiza los pedidos a proveedores.</p>
+            <div class="ZonaTrabajo">
+                <section class="ContenedorTabla">
+                    <div class="TituloTabla">
+                        <div>
+                            <h2>Registro de compras</h2>
+                            <p>Revisa proveedores, artículos, importes y recepción</p>
+                        </div>
+                        <i class="bi bi-three-dots" aria-hidden="true"></i>
                     </div>
-                    <input id="buscar" type="search"
-                        placeholder="Buscar por proveedor o ID...">
-                </div>
-
-                <div class="TablaContenedor">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Proveedor</th>
-                                <th>Fecha</th>
-                                <th>Total (L)</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaPedidos">
-                            <tr>
-                                <td colspan="6" class="Vacio">
-                                    No hay pedidos registrados.
-                                    Utiliza el formulario para agregar uno.
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section class="Panel" id="formulario">
-                <div class="PanelTitulo">
-                    <div>
-                        <h2>Registrar pedido a proveedor</h2>
-                        <p>Ingresa los datos de la compra.</p>
+                    <div class="TablaDesplazable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Proveedor</th>
+                                    <th>Artículos</th>
+                                    <th>Fecha de compra</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tablaPedidos"></tbody>
+                        </table>
                     </div>
-                </div>
-
-                <form id="formPedido">
-                    <div class="Campos">
-                        <label>
-                            Nombre del proveedor
-                            <input id="proveedor" type="text"
-                                placeholder="Nombre del proveedor" required>
-                        </label>
-
-                        <label>
-                            Fecha del pedido
-                            <input id="fecha" type="date" required>
-                        </label>
-
-                        <label>
-                            Total del pedido (L)
-                            <input id="monto" type="number" min="0.01"
-                                step="0.01" placeholder="0.00" required>
-                        </label>
-
-                        <label>
-                            Estado inicial
-                            <select id="estado">
-                                <option>Pendiente</option>
-                                <option>En proceso</option>
-                                <option>Terminado</option>
-                                <option>Entregado</option>
-                            </select>
-                        </label>
+                    <div class="PieTabla">
+                        <span id="estadoListado">Cargando pedidos...</span>
+                        <span class="Indicador">
+                            <i class="bi bi-circle-fill"></i>
+                            Cargando pedidos
+                        </span>
                     </div>
+                </section>
 
-                    <p class="Aviso">
-                        Esta versión es una demostración visual.
-                        Los productos y detalles se incorporarán al conectar la base de datos.
-                    </p>
-
-                    <div class="AccionesFormulario">
-                        <button type="reset" class="btn-secundario">Limpiar</button>
-                        <button type="submit" class="btn-principal">
-                            Registrar pedido
-                        </button>
+                <section class="FormularioEncargo" id="formulario" hidden>
+                    <div class="TituloFormulario">
+                        <i class="bi bi-truck"></i>
+                        <div>
+                            <h2>Registrar compra</h2>
+                            <p>Escribe el proveedor y agrega los artículos</p>
+                        </div>
                     </div>
-                </form>
-            </section>
+                    <form id="formPedido">
+                        <label for="entidad">Proveedor *</label>
+                        <input id="entidad" type="text" list="opcionesEntidad" maxlength="100"
+                            autocomplete="off" placeholder="Escribe o selecciona un proveedor" required>
+                        <datalist id="opcionesEntidad"></datalist>
+
+                        <label for="fecha">Fecha de compra *</label>
+                        <input id="fecha" type="date" required>
+
+                        <div id="campoMonto">
+                            <label for="monto">Total de la compra (L) *</label>
+                            <input id="monto" type="number" min="0.01" step="0.01"
+                                placeholder="0.00" required>
+                        </div>
+
+                        <section class="SeccionArticulos" id="seccionArticulos" hidden aria-labelledby="tituloArticulos">
+                            <div class="EncabezadoArticulos">
+                                <div>
+                                    <h3 id="tituloArticulos">Artículos de la compra</h3>
+                                    <p>Elige productos del proveedor y registra cantidades y costo unitario.</p>
+                                </div>
+                                <button type="button" class="BotonAgregarArticulo" id="btnAgregarArticulo">
+                                    <i class="bi bi-plus-lg" aria-hidden="true"></i>
+                                    Agregar artículo
+                                </button>
+                            </div>
+                            <div class="EncabezadosFilaArticulo" aria-hidden="true">
+                                <span>Producto</span>
+                                <span>Cantidad</span>
+                                <span>Costo unitario</span>
+                                <span>Subtotal</span>
+                                <span></span>
+                            </div>
+                            <div class="ListaArticulos" id="listaArticulos"></div>
+                            <p class="AvisoArticulos" id="avisoArticulos" aria-live="polite">
+                                Selecciona un proveedor para consultar sus productos.
+                            </p>
+                            <div class="TotalCalculado">
+                                <span>Total de la compra</span>
+                                <strong id="totalCalculado">L 0.00</strong>
+                            </div>
+                        </section>
+
+                        <label for="estado">Estado inicial</label>
+                        <select id="estado">
+                            <option value="Pedido">Pedido</option>
+                            <option value="Recibido">Recibido</option>
+                        </select>
+
+                        <p class="Aviso" id="avisoPedido">
+                            Completa los datos para registrar la compra.
+                        </p>
+
+                        <div class="BotonesFormulario">
+                            <button type="submit" class="BotonGuardar">
+                                <i class="bi bi-floppy"></i>
+                                Registrar compra
+                            </button>
+                            <button type="button" class="BotonCancelar" id="btnCancelarPedido">
+                                <i class="bi bi-x-lg"></i>
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
         </section>
     </main>
 
-    <script>
-        const estados = ['Pendiente', 'En proceso', 'Terminado', 'Entregado'];
-        const pedidos = [];
-        let siguienteId = 1;
-
-        const tabla = document.getElementById('tablaPedidos');
-        const formulario = document.getElementById('formPedido');
-
-        document.getElementById('fecha').value =
-            new Date().toLocaleDateString('en-CA');
-
-        function crearCelda(texto) {
-            const td = document.createElement('td');
-            td.textContent = texto;
-            return td;
-        }
-
-        function actualizarResumen() {
-            document.getElementById('total').textContent = pedidos.length;
-            document.getElementById('pendientes').textContent =
-                pedidos.filter(p => p.estado === 'Pendiente').length;
-            document.getElementById('proceso').textContent =
-                pedidos.filter(p => p.estado === 'En proceso').length;
-            document.getElementById('finalizados').textContent =
-                pedidos.filter(p => ['Terminado', 'Entregado'].includes(p.estado)).length;
-        }
-
-        function renderizar() {
-            tabla.replaceChildren();
-
-            const busqueda = document.getElementById('buscar').value.toLowerCase();
-
-            const filtrados = pedidos.filter(p =>
-                String(p.id).includes(busqueda) ||
-                p.nombre.toLowerCase().includes(busqueda)
-            );
-
-            if (filtrados.length === 0) {
-                const fila = document.createElement('tr');
-                const td = crearCelda('No hay pedidos que mostrar.');
-                td.colSpan = 6;
-                td.className = 'Vacio';
-                fila.append(td);
-                tabla.append(fila);
-            }
-
-            filtrados.forEach(p => {
-                const fila = document.createElement('tr');
-                fila.append(
-                    crearCelda('#' + p.id),
-                    crearCelda(p.nombre),
-                    crearCelda(p.fecha),
-                    crearCelda('L ' + p.total.toFixed(2))
-                );
-
-                const tdEstado = document.createElement('td');
-                const select = document.createElement('select');
-                select.className = 'selector-estado';
-
-                estados.forEach(estado => {
-                    const opcion = document.createElement('option');
-                    opcion.value = estado;
-                    opcion.textContent = estado;
-                    opcion.selected = p.estado === estado;
-                    select.append(opcion);
-                });
-
-                select.addEventListener('change', () => {
-                    p.estado = select.value;
-                    renderizar();
-                });
-
-                tdEstado.append(select);
-                fila.append(tdEstado);
-
-                const tdAcciones = document.createElement('td');
-                const boton = document.createElement('button');
-                boton.textContent = 'Ver detalle';
-                boton.className = 'btn-detalle';
-
-                boton.addEventListener('click', () => {
-                    alert(
-                        'Pedido #' + p.id +
-                        '\nProveedor: ' + p.nombre +
-                        '\nFecha: ' + p.fecha +
-                        '\nTotal: L ' + p.total.toFixed(2) +
-                        '\nEstado: ' + p.estado
-                    );
-                });
-
-                tdAcciones.append(boton);
-                fila.append(tdAcciones);
-                tabla.append(fila);
-            });
-
-            actualizarResumen();
-        }
-
-        formulario.addEventListener('submit', evento => {
-            evento.preventDefault();
-
-            pedidos.push({
-                id: siguienteId++,
-                nombre: document.getElementById('proveedor').value.trim(),
-                fecha: document.getElementById('fecha').value,
-                total: Number(document.getElementById('monto').value),
-                estado: document.getElementById('estado').value
-            });
-
-            formulario.reset();
-            document.getElementById('fecha').value =
-                new Date().toLocaleDateString('en-CA');
-
-            renderizar();
-            alert('Pedido agregado a la demostración.');
-        });
-
-        document.getElementById('buscar').addEventListener('input', renderizar);
-
-        renderizar();
-    </script>
-
+    <script src="../controllers/roles.js"></script>
 </body>
 </html>
