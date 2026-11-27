@@ -5,21 +5,13 @@ const tablaHistorial = document.getElementById("tablaHistorial");
 const buscarEntrega = document.getElementById("buscarEntrega");
 const mensaje = document.getElementById("mensaje");
 
-const CLAVE_FECHAS = "costumas_fechas_entregas";
+let fechasLocalesAnteriores = {};
 let pedidos = [];
-let fechasLocales = cargarFechasLocales();
 
-function cargarFechasLocales() {
-    try {
-        return JSON.parse(localStorage.getItem(CLAVE_FECHAS)) || {};
-    } catch (error) {
-        console.error("No se pudieron leer las fechas locales:", error);
-        return {};
-    }
-}
-
-function guardarFechasLocales() {
-    localStorage.setItem(CLAVE_FECHAS, JSON.stringify(fechasLocales));
+try {
+    fechasLocalesAnteriores = JSON.parse(localStorage.getItem("costumas_fechas_entregas")) || {};
+} catch (error) {
+    console.error("No se pudieron leer las fechas guardadas anteriormente:", error);
 }
 
 function fechaActual() {
@@ -40,7 +32,7 @@ function fechaISO(fecha) {
 
 function mostrarFecha(fecha) {
     const valor = fechaISO(fecha);
-    if (!valor || !/^\\d{4}-\\d{2}-\\d{2}$/.test(valor)) return "No registrada";
+    if (!valor || !/^\d{4}-\d{2}-\d{2}$/.test(valor)) return "No registrada";
     const [anio, mes, dia] = valor.split("-");
     return `${dia}/${mes}/${anio}`;
 }
@@ -86,7 +78,8 @@ function renderizarPendientes() {
 
     tablaPendientes.innerHTML = lista.map(pedido => {
         const id = Number(pedido.id_pedido_c);
-        const fechas = fechasLocales[id] || {};
+        const fechaProgramada = pedido.fecha_programada ||
+            (fechasLocalesAnteriores[id] && fechasLocalesAnteriores[id].programada);
         return `
             <tr>
                 <td class="IdPedido">#${id}</td>
@@ -95,7 +88,7 @@ function renderizarPendientes() {
                 <td>${mostrarFecha(pedido.fecha_pedido)}</td>
                 <td>
                     <input class="CampoFecha fecha-programada" type="date"
-                        data-id="${id}" value="${escapar(fechas.programada || "")}"
+                        data-id="${id}" value="${escapar(fechaISO(fechaProgramada))}"
                         aria-label="Fecha programada del pedido ${id}">
                 </td>
                 <td>L ${Number(pedido.total || 0).toFixed(2)}</td>
@@ -115,10 +108,20 @@ function renderizarPendientes() {
     tablaPendientes.querySelectorAll(".fecha-programada").forEach(input => {
         input.addEventListener("change", () => {
             const id = input.dataset.id;
-            fechasLocales[id] = fechasLocales[id] || {};
-            fechasLocales[id].programada = input.value;
-            guardarFechasLocales();
-            notificar(input.value ? "Fecha programada guardada en este equipo." : "Fecha programada eliminada.");
+            input.disabled = true;
+            entregasModel.actualizarFechaProgramada(Number(id), input.value || null, error => {
+                input.disabled = false;
+                if (error) {
+                    console.error("No se pudo guardar la fecha programada:", error);
+                    notificar(error.message || "No se pudo guardar la fecha programada.", "error");
+                    cargarPedidos(false);
+                    return;
+                }
+
+                const pedido = pedidos.find(item => Number(item.id_pedido_c) === Number(id));
+                if (pedido) pedido.fecha_programada = input.value || null;
+                notificar(input.value ? "Fecha programada guardada." : "Fecha programada eliminada.");
+            });
         });
     });
 
@@ -143,7 +146,7 @@ function confirmarEntrega(id, boton) {
     if (!confirm(`¿Confirmas que el pedido #${id} fue entregado el ${mostrarFecha(fecha)}?`)) return;
 
     boton.disabled = true;
-    entregasModel.marcarComoEntregado(Number(id), error => {
+    entregasModel.marcarComoEntregado(Number(id), fecha, error => {
         if (error) {
             console.error(error);
             boton.disabled = false;
@@ -151,9 +154,6 @@ function confirmarEntrega(id, boton) {
             return;
         }
 
-        fechasLocales[id] = fechasLocales[id] || {};
-        fechasLocales[id].entrega = fecha;
-        guardarFechasLocales();
         notificar(`El pedido #${id} ahora aparece como Entregado.`);
         cargarPedidos(false);
     });
@@ -167,14 +167,16 @@ function renderizarHistorial() {
     }
 
     tablaHistorial.innerHTML = lista.map(pedido => {
-        const fechas = fechasLocales[pedido.id_pedido_c] || {};
+        const fechaEntrega = pedido.fecha_entrega ||
+            (fechasLocalesAnteriores[pedido.id_pedido_c] &&
+                fechasLocalesAnteriores[pedido.id_pedido_c].entrega);
         return `
             <tr>
                 <td class="IdPedido">#${Number(pedido.id_pedido_c)}</td>
                 <td>${escapar(pedido.nombre_cliente)}</td>
                 <td>${escapar(pedido.numero || "Sin teléfono")}</td>
                 <td>${mostrarFecha(pedido.fecha_pedido)}</td>
-                <td>${mostrarFecha(fechas.entrega)}</td>
+                <td>${mostrarFecha(fechaEntrega)}</td>
                 <td>L ${Number(pedido.total || 0).toFixed(2)}</td>
                 <td><span class="EstadoEtiqueta">Entregado</span></td>
             </tr>`;
