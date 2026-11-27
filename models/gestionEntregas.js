@@ -6,7 +6,9 @@ function obtenerPedidos(callback) {
     const sql = `
         SELECT
             PC.id_pedido_c,
-            PC.fecha_pedido,
+            DATE_FORMAT(PC.fecha_pedido, '%Y-%m-%d') AS fecha_pedido,
+            DATE_FORMAT(PC.fecha_programada, '%Y-%m-%d') AS fecha_programada,
+            DATE_FORMAT(PC.fecha_entrega, '%Y-%m-%d') AS fecha_entrega,
             PC.estado,
             PC.total,
             C.nombre AS nombre_cliente,
@@ -20,15 +22,63 @@ function obtenerPedidos(callback) {
     conexion.query(sql, callback);
 }
 
-// Actualiza el estado en la tabla Pedidos_C, sin crear ni modificar tablas.
-function marcarComoEntregado(idPedido, callback) {
+function esFechaValida(fecha) {
+    if (typeof fecha !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return false;
+    const [anio, mes, dia] = fecha.split("-").map(Number);
+    const fechaVerificada = new Date(Date.UTC(anio, mes - 1, dia));
+    return fechaVerificada.getUTCFullYear() === anio &&
+        fechaVerificada.getUTCMonth() === mes - 1 &&
+        fechaVerificada.getUTCDate() === dia;
+}
+
+function actualizarFechaProgramada(idPedido, fecha, callback) {
+    if (fecha !== null && !esFechaValida(fecha)) {
+        callback(new Error("La fecha programada no es válida."));
+        return;
+    }
+
     const sql = `
         UPDATE Pedidos_C
-        SET estado = 'Entregado'
+        SET fecha_programada = ?
         WHERE id_pedido_c = ? AND estado = 'Terminado'
     `;
 
-    conexion.query(sql, [idPedido], (error, resultado) => {
+    conexion.query(sql, [fecha, idPedido], (error, resultado) => {
+        if (error) return callback(error);
+        if (resultado.affectedRows === 0) {
+            conexion.query(
+                `SELECT id_pedido_c
+                FROM Pedidos_C
+                WHERE id_pedido_c = ? AND estado = 'Terminado'
+                    AND fecha_programada <=> ?`,
+                [idPedido, fecha],
+                (errorVerificacion, pedidosCoincidentes) => {
+                    if (errorVerificacion) return callback(errorVerificacion);
+                    if (!pedidosCoincidentes.length) {
+                        return callback(new Error("El pedido ya no está terminado o no existe."));
+                    }
+                    callback(null, resultado);
+                }
+            );
+            return;
+        }
+        callback(null, resultado);
+    });
+}
+
+function marcarComoEntregado(idPedido, fecha, callback) {
+    if (!esFechaValida(fecha)) {
+        callback(new Error("La fecha de entrega no es válida."));
+        return;
+    }
+
+    const sql = `
+        UPDATE Pedidos_C
+        SET estado = 'Entregado', fecha_entrega = ?
+        WHERE id_pedido_c = ? AND estado = 'Terminado'
+    `;
+
+    conexion.query(sql, [fecha, idPedido], (error, resultado) => {
         if (error) return callback(error);
 
         if (resultado.affectedRows === 0) {
@@ -41,5 +91,6 @@ function marcarComoEntregado(idPedido, callback) {
 
 module.exports = {
     obtenerPedidos,
+    actualizarFechaProgramada,
     marcarComoEntregado
 };
