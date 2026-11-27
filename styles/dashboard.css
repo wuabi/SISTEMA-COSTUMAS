@@ -1,0 +1,317 @@
+:root {
+    --color-acento: #e83e79;
+    --color-acento-fuerte: #9b0b43;
+    --color-texto: #f2f2f2;
+    --color-texto-secundario: #92979b;
+    --color-borde: #383c3f;
+    --color-fondo: #0e1116;
+    --color-panel: #1f2326;
+    --color-panel-interior: #15191c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    color: var(--color-texto);
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-fondo);
+}
+
+.Actividades::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.Actividades::-webkit-scrollbar-track {
+    background: #101619;
+    border-radius: 8px;
+}
+
+.Actividades::-webkit-scrollbar-thumb {
+    background: #383c3f;
+    border-radius: 7px;
+}
+
+.Actividades::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-acento);
+}
+
+i {
+    font-size: 1.3em;
+}
+
+.button {
+    width: auto;
+    padding: 0.45em;
+    color: var(--color-texto-secundario);
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 0.5em;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.button:hover {
+    color: var(--color-acento);
+    background-color: rgba(232, 62, 121, 0.08);
+}
+
+.Contenido {
+    width: auto;
+    min-width: 0;
+    flex: 1;
+    height: 100vh;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-fondo);
+}
+
+.Contenido > nav {
+    width: 100%;
+    min-height: 92px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color-texto-secundario);
+    background-color: var(--color-panel);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.8rem;
+    border-bottom: 1px solid var(--color-borde);
+}
+
+nav h2 {
+    margin-bottom: 0.45rem;
+    color: var(--color-texto);
+    font-size: 1.45rem;
+}
+
+nav p {
+    color: var(--color-texto-secundario);
+    font-size: 0.85rem;
+}
+
+.IconosSuperiores {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.IconosSuperiores button {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    color: var(--color-texto-secundario);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.IconosSuperiores button:hover,
+.IconosSuperiores button:focus-visible {
+    color: var(--color-acento);
+    border-color: var(--color-borde);
+}
+
+.IconosSuperiores i {
+    font-size: 1.2rem;
+}
+
+.Bento {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+    padding: 1.6rem;
+}
+
+h1 {
+    margin: auto;
+    color: var(--color-texto);
+    text-align: center;
+    font-size: 2.5em;
+}
+
+h2 {
+    color: var(--color-texto);
+}
+
+.Circle {
+    height: 60%;
+    aspect-ratio: 1 / 1;
+    justify-self: center;
+    align-self: center;
+    margin: auto;
+    background-color: var(--color-acento-fuerte);
+    border-radius: 50%;
+}
+
+.Bento > div {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    color: var(--color-texto-secundario);
+    text-align: center;
+    background: linear-gradient(145deg, #22272b, #1b1f22);
+    border: 1px solid var(--color-borde);
+    border-radius: 0.9rem;
+    box-shadow: none;
+}
+
+.EstadoDashboard {
+    margin: 0 1.6rem;
+    padding: 0.8rem 1rem;
+    color: #ffb4c8;
+    text-align: left;
+    background-color: rgba(155, 11, 67, 0.18);
+    border: 1px solid rgba(232, 62, 121, 0.4);
+    border-radius: 0.6rem;
+}
+
+.EstadoDashboard[hidden],
+#estadoGrafico[hidden],
+#graficoEncargos[hidden] {
+    display: none;
+}
+
+.Bento > div:nth-of-type(-n + 3) {
+    border-top: 2px solid var(--color-acento-fuerte);
+}
+
+.Bento h4 {
+    color: #dfe7eb;
+}
+
+.ActividadesClientes {
+    grid-row: 2 / 5;
+    grid-column: 1 / 3;
+    gap: 1em;
+}
+
+.EstadoEncargos {
+    grid-row: 2 / 5;
+    grid-column: 3 / 4;
+}
+
+.Actividades {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 1em;
+    overflow: auto;
+    background-color: var(--color-panel-interior);
+    border: 1px solid var(--color-borde);
+    border-radius: 0.6rem;
+}
+
+.Actividades > span {
+    padding: 1em;
+    text-align: left;
+    background-color: #22272b;
+    border: 1px solid var(--color-borde);
+    border-radius: 0.55rem;
+}
+
+.Actividades > span h4 {
+    margin-bottom: 0.35rem;
+    color: #dfe7eb;
+}
+
+.Actividades > span p {
+    color: var(--color-texto-secundario);
+    font-size: 0.85rem;
+}
+
+.selector-estado {
+    width: 100%;
+    margin-top: 5px;
+    padding: 0.4em 0.8em;
+    color: var(--color-texto);
+    font-size: 0.9em;
+    background-color: #15191c;
+    border: 1px solid var(--color-borde);
+    border-radius: 0.55rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.selector-estado:hover {
+    border-color: var(--color-acento);
+}
+
+.selector-estado:focus {
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 2px rgba(232, 62, 121, 0.1);
+}
+
+.selector-estado option {
+    color: var(--color-texto);
+    background-color: #15191c;
+}
+
+@media (max-width: 1050px) {
+    .Bento {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+    }
+
+    .ActividadesClientes,
+    .EstadoEncargos {
+        grid-row: auto;
+        grid-column: auto;
+        min-height: 360px;
+    }
+}
+
+@media (max-width: 700px) {
+    body {
+        flex-direction: column;
+    }
+
+    .Bento {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto;
+        padding: 1rem;
+    }
+
+    .Bento > div {
+        min-height: 180px;
+    }
+
+    .ActividadesClientes,
+    .EstadoEncargos {
+        grid-row: auto;
+        grid-column: auto;
+        min-height: 360px;
+    }
+
+    nav {
+        padding: 1rem;
+    }
+}
