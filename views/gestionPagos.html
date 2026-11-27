@@ -1,46 +1,290 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Gestión de pagos | Costumas</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="../styles/gestionMedidas.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de pagos | Costumas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../styles/pagos.css">
 </head>
+
 <body>
-	<aside class="Lateral">
-		<img src="../assets/logo-costumas4.png" alt="Logo Costumas" class="LogoMenu">
-		<button type="button" onclick="location.href='dashboard.html'"><i class="bi bi-house"></i> Panel principal</button>
-		<button type="button" onclick="location.href='gestionClientes.html'"><i class="bi bi-people"></i> Gestión de clientes</button>
-		<button type="button" onclick="location.href='gestionMedidas.html'"><i class="bi bi-pencil-square"></i> Gestión de medidas</button>
-		<button type="button" onclick="location.href='encargosclientes.html'"><i class="bi bi-clipboard2-plus"></i> Encargos</button>
-		<button type="button" onclick="location.href='encargosproveedores.html'"><i class="bi bi-truck"></i> Pedidos a proveedores</button>
-		<button type="button" onclick="location.href='gestionEntregas.html'"><i class="bi bi-clipboard2-check"></i> Entregas</button>
-		<button class="Activo" type="button" aria-current="page" onclick="location.href='gestionPagos.html'"><i class="bi bi-cash-coin"></i> Pagos</button>
-		<button type="button" onclick="location.href='gestionReportes.html'"><i class="bi bi-graph-up-arrow"></i> Reportes</button>
-	</aside>
+    <aside class="Lateral">
+        <img src="../assets/logo-costumas4.png" alt="Logo Costumas" class="LogoMenu">
+        <button type="button" onclick="location.href='dashboard.html'"><i class="bi bi-house-door"></i> Panel principal</button>
+        <button type="button" onclick="location.href='gestionClientes.html'"><i class="bi bi-people"></i> Gestión de clientes</button>
+        <button type="button" onclick="location.href='gestionMedidas.html'"><i class="bi bi-pencil-square"></i> Gestión de medidas</button>
+        <button type="button" onclick="location.href='encargosclientes.html'"><i class="bi bi-clipboard2-plus"></i> Encargos</button>
+        <button type="button" onclick="location.href='encargosproveedores.html'"><i class="bi bi-truck"></i> Pedidos a proveedores</button>
+        <button type="button" onclick="location.href='gestionEntregas.html'"><i class="bi bi-clipboard2-check"></i> Entregas</button>
+        <button class="Activo" type="button" aria-current="page"><i class="bi bi-cash-coin"></i> Pagos</button>
+        <button type="button" onclick="location.href='gestionReportes.html'"><i class="bi bi-graph-up-arrow"></i> Reportes</button>
+    </aside>
 
-	<main class="ContenidoMedidas">
-		<nav class="BarraSuperior" aria-label="Encabezado">
-			<div>
-				<h1>Gestión de pagos</h1>
-				<p>Consulta y administra los pagos de tus clientes</p>
-			</div>
-			<div class="IconosSuperiores" aria-label="Accesos de usuario">
-				<!-- <button type="button" aria-label="Configuración"><i class="bi bi-gear"></i></button> -->
-				<button type="button" aria-label="Notificaciones"><i class="bi bi-bell"></i></button>
-				<button type="button" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
-			</div>
-		</nav>
+    <main class="ContenidoPagos">
 
-		<section class="PanelMedidas" aria-label="Estado del módulo">
-			<div class="NotaUnidad" role="status">
-				<i class="bi bi-tools" aria-hidden="true"></i>
-				<p><strong>Módulo en desarrollo</strong><br>La gestión de pagos estará disponible próximamente.</p>
-			</div>
-		</section>
-	</main>
-	<script src="../controllers/notificaciones.js"></script>
-	<script src="../controllers/perfil.js"></script>
+        <nav class="BarraSuperior">
+            <div>
+                <h1>Gestión de pagos</h1>
+                <p>Administra y consulta los pagos registrados en el sistema.</p>
+            </div>
+            <div class="IconosSuperiores" aria-label="Accesos de usuario">
+                <button type="button" aria-label="Notificaciones"><i class="bi bi-bell"></i></button>
+                <button type="button" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
+            </div>
+        </nav>
+
+
+        <section class="PanelPagos">
+
+            <!-- TÍTULO -->
+            <div class="EncabezadoPanel">
+                <div>
+                    <h2>Pagos</h2>
+                    <p>Control y seguimiento de los movimientos de pago.</p>
+                </div>
+            </div>
+
+
+            <!-- TARJETAS -->
+            <section class="TarjetasPagos">
+
+                <article class="Tarjeta">
+                    <div class="InformacionTarjeta">
+                        <span>Total de pagos</span>
+                        <h3 id="totalPagos">0</h3>
+                        <small>Pagos registrados</small>
+                    </div>
+                    <div class="IconoTarjeta">
+                        <i class="bi bi-receipt"></i>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="InformacionTarjeta">
+                        <span>Total recaudado</span>
+                        <h3 id="totalRecaudado">L. 0.00</h3>
+                        <small>Monto acumulado</small>
+                    </div>
+                    <div class="IconoTarjeta">
+                        <i class="bi bi-wallet2"></i>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="InformacionTarjeta">
+                        <span>Pagos completados</span>
+                        <h3 id="pagosCompletados">0</h3>
+                        <small>Pagos realizados</small>
+                    </div>
+                    <div class="IconoTarjeta">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                </article>
+
+                <article class="Tarjeta">
+                    <div class="InformacionTarjeta">
+                        <span>Pagos pendientes</span>
+                        <h3 id="pagosPendientes">0</h3>
+                        <small>Pagos por completar</small>
+                    </div>
+                    <div class="IconoTarjeta">
+                        <i class="bi bi-clock"></i>
+                    </div>
+                </article>
+
+            </section>
+
+
+            <!-- ACCIONES -->
+            <section class="BarraAcciones">
+
+                <div class="Buscador">
+                    <i class="bi bi-search"></i>
+                    <input
+                        type="search"
+                        id="buscarPago"
+                        placeholder="Buscar pago..."
+                    >
+                </div>
+
+                <button type="button" class="BotonNuevo" id="btnNuevoPago">
+                    <i class="bi bi-plus-lg"></i>
+                    Nuevo pago
+                </button>
+
+            </section>
+
+
+            <!-- TABLA Y FORMULARIO -->
+            <section class="ZonaTrabajo">
+
+                <!-- TABLA -->
+                <div class="ContenedorTabla">
+
+                    <div class="TituloTabla">
+                        <div>
+                            <h3>Historial de pagos</h3>
+                            <p>Listado de los pagos registrados.</p>
+                        </div>
+                    </div>
+
+                    <div class="TablaDesplazable">
+                        <table class="TablaPagos">
+
+                            <thead>
+                                <tr>
+                                    <th>ID PAGO</th>
+                                    <th>ID VENTA</th>
+                                    <th>FECHA</th>
+                                    <th>MONTO</th>
+                                    <th>MÉTODO</th>
+                                    <th>ESTADO</th>
+                                    <th>TOTAL VENTA</th>
+                                    <th>TOTAL ABONADO</th>
+                                    <th>SALDO PENDIENTE</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="TablaPagos">
+                                <tr class="FilaVacia">
+                                    <td colspan="10">
+                                        <div class="MensajeVacio">
+                                            <i class="bi bi-receipt"></i>
+                                            <strong>No hay pagos registrados</strong>
+                                            <span>Los pagos aparecerán aquí cuando sean registrados.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <div class="PieTabla">
+                        <span>Pagos registrados en el sistema</span>
+                    </div>
+
+                </div>
+
+
+                <!-- FORMULARIO -->
+                <aside class="FormularioPago" id="FormularioPago" hidden>
+
+                    <div class="TituloFormulario">
+
+                        <div class="IconoFormulario">
+                            <i class="bi bi-cash-coin"></i>
+                        </div>
+
+                        <div>
+                            <h3>Nuevo pago</h3>
+                            <p>Ingresa la información del pago.</p>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="CerrarFormulario"
+                            id="btnCerrarPago"
+                            title="Cerrar"
+                        >
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+
+                    </div>
+
+
+                    <form id="formPago">
+
+                        <!-- ID oculto para editar pagos -->
+                        <input type="hidden" id="idPago" name="idPago">
+
+                        <div class="GrupoFormulario">
+                            <label for="id_venta">ID de venta</label>
+                            <input
+                                type="number"
+                                id="id_venta"
+                                name="id_venta"
+                                min="1"
+                                placeholder="Ingrese el ID de venta"
+                                required
+                            >
+                        </div>
+
+                        <div class="GrupoFormulario">
+                            <label for="monto">Monto</label>
+                            <div class="CampoMonto">
+                                <span>L.</span>
+                                <input
+                                    type="number"
+                                    id="monto"
+                                    name="monto"
+                                    min="0.01"
+                                    step="0.01"
+                                    placeholder="0.00"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="GrupoFormulario">
+                            <label for="metodo_pago">Método de pago</label>
+                            <select id="metodo_pago" name="metodo_pago" required>
+                                <option value="" disabled selected>
+                                    Seleccione un método
+                                </option>
+                                <option value="Efectivo">Efectivo</option>
+                                <option value="Tarjeta">Tarjeta</option>
+                                <option value="Transferencia">Transferencia</option>
+                            </select>
+                        </div>
+
+                        <div class="GrupoFormulario">
+                            <label for="estado_pago">Estado del pago</label>
+                            <select id="estado_pago" name="estado_pago" required>
+                                <option value="Pendiente">Pendiente</option>
+                                <option value="Pagado">Pagado</option>
+                                <option value="Cancelado">Cancelado</option>
+                            </select>
+                        </div>
+
+
+                        <div class="NotaFormulario">
+                            <i class="bi bi-info-circle"></i>
+                            <span>Verifica que la información ingresada sea correcta.</span>
+                        </div>
+
+
+                        <div class="BotonesFormulario">
+
+                            <button type="submit" class="BotonGuardar">
+                                <i class="bi bi-floppy"></i>
+                                Registrar pago
+                            </button>
+
+                            <button
+                                type="button"
+                                class="BotonCancelar"
+                                id="btnCancelarPago"
+                            >
+                                <i class="bi bi-x-lg"></i>
+                                Cancelar
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </aside>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <script src="../controllers/roles.js"></script>
+
 </body>
 </html>
