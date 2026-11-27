@@ -11,11 +11,11 @@
 <body>
     <aside class="Lateral">
         <img src="../assets/logo-costumas4.png" alt="Logo Costumas" class="LogoMenu">
-        <button type="button" onclick="location.href='dashboard.html'"><i class="bi bi-house"></i> Panel principal</button>
+        <button type="button" onclick="location.href='dashboard.html'"><i class="bi bi-house-door"></i> Panel principal</button>
         <button type="button" onclick="location.href='gestionClientes.html'"><i class="bi bi-people"></i> Gestión de clientes</button>
         <button type="button" onclick="location.href='gestionMedidas.html'"><i class="bi bi-pencil-square"></i> Gestión de medidas</button>
         <button type="button" onclick="location.href='encargosclientes.html'"><i class="bi bi-clipboard2-plus"></i> Encargos</button>
-        <button type="button" onclick="location.href='encargosproveedores-html"><i class="bi bi-truck"></i> Pedidos a proveedores</button>
+        <button type="button" onclick="location.href='encargosproveedores.html'"><i class="bi bi-truck"></i> Pedidos a proveedores</button>
         <button class="Activo" type="button" aria-current="page"><i class="bi bi-clipboard2-check"></i> Entregas</button>
         <button type="button" onclick="location.href='gestionPagos.html'"><i class="bi bi-cash-coin"></i> Pagos</button>
         <button type="button" onclick="location.href='gestionReportes.html'"><i class="bi bi-graph-up-arrow"></i> Reportes</button>
@@ -28,7 +28,6 @@
                 <p>Consulta pedidos terminados y registra cuándo se entregan.</p>
             </div>
             <div class="IconosSuperiores" aria-label="Accesos de usuario">
-                <button type="button" aria-label="Configuración"><i class="bi bi-gear"></i></button>
                 <button type="button" aria-label="Notificaciones"><i class="bi bi-bell"></i></button>
                 <button type="button" aria-label="Perfil"><i class="bi bi-person-circle"></i></button>
             </div>
@@ -71,7 +70,7 @@
                         </tbody>
                     </table>
                 </div>
-                <p class="NotaTabla"><i class="bi bi-info-circle"></i> La fecha programada y la fecha real se guardan localmente en este equipo, porque la base de datos actual no tiene columnas para esas fechas.</p>
+                <p class="NotaTabla"><i class="bi bi-info-circle"></i> Las fechas programadas y de entrega se guardan junto con el pedido en la base de datos.</p>
             </section>
 
             <section class="PanelEntregas">
@@ -95,6 +94,6 @@
             <div id="mensaje" class="Mensaje" role="status" aria-live="polite"></div>
         </section>
     </main>
-    <script src="../controllers/gestionEntregasController.js"></script>
+    <script src="../controllers/roles.js"></script>
 </body>
 </html>
